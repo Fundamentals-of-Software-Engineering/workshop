@@ -1,11 +1,13 @@
 public class Dog extends Animal {
 
+    private String furColor;
+
     public Dog(String name, double weight, String furColor) {
-        super(name, weight, furColor);
+        super(name, weight, () -> "Woof");
+        this.furColor = furColor;
     }
 
-    @Override
-    public String makeSound() {
-        return "Woof";
+    public String getFurColor() {
+        return furColor;
     }
 }

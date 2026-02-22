@@ -1,90 +1,52 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-/**
- * WeightTracker.java
- * Created by: jsmith
- * Created on: 03/15/2019
- * Modified by: jdoe on 06/22/2020 - added print method
- * Modified by: abrown on 11/03/2021 - fixed bug #4521
- * Modified by: cwhite on 01/17/2022 - added average calculation
- * Modified by: jsmith on 09/30/2023 - refactored (not really)
- *
- * This class tracks weights for animals in the pet clinic.
- */
 public class WeightTracker {
 
+    private static final double HEAVY_THRESHOLD = 100.0;
     private List<Animal> animals = new ArrayList<>();
 
-    public void addAnimal(Animal a) {
-        animals.add(a);
+    public void addAnimal(Animal animal) {
+        animals.add(animal);
     }
 
-    public void processAndPrintWeightReport() {
-        // check if null
-        if (animals == null || animals.size() == 0) {
+    public void printWeightReport() {
+        if (animals.isEmpty()) {
             System.out.println("No animals");
             return;
         }
 
-        double d = 0;
-        int temp = 0;
-        boolean flag = false;
+        List<Double> weights = new ArrayList<>();
+        boolean hasHeavyAnimal = false;
 
-        // loop through the list
-        for (int i = 0; i < animals.size(); i++) {
-            Animal a = animals.get(i);
-            // get the weight
-            double w = a.getWeight();
-            if (w > 0)
-                d = d + w;
-                temp++;
+        for (Animal animal : animals) {
+            double weight = animal.getWeight();
+            weights.add(weight);
+            System.out.println(WeightReportFormatter.formatRow(animal.getName(), weight));
 
-            // Weight is in kilograms
-            String res = String.format("| %-15s | %8.2f lbs |", a.getName(), w);
-            System.out.println(res);
-
-            if (w > 100) {
-                flag = true;
+            if (weight > HEAVY_THRESHOLD) {
+                hasHeavyAnimal = true;
             }
         }
 
         System.out.println("----------------------------------");
 
-        double avg = d / temp;
-        String res = String.format("| %-15s | %8.2f lbs |", "Average", avg);
-        System.out.println(res);
+        double average = WeightCalculator.average(weights);
+        System.out.println(WeightReportFormatter.formatRow("Average", average));
 
-        if (flag) {
-            System.out.println("WARNING: Some animals exceed 100 lbs!");
+        if (hasHeavyAnimal) {
+            System.out.println("WARNING: Some animals exceed " + HEAVY_THRESHOLD + " lbs!");
         }
-
-        System.out.println();
-        System.out.println("Sound Check:");
-        // loop through the list again
-        for (Animal a : animals) {
-            System.out.println(a.getName() + " says: " + a.makeSound());
-        }
-
-        System.out.println();
-        // don't touch this, it works
-        System.out.println("Heavy animals: " + animals.stream().filter(a -> a.getWeight() > 50).map(a -> a.getName()).collect(Collectors.joining(", ", "[", "]")));
     }
 
-    public double calculateAverage(List<Double> weights) {
-        double sum = 0;
-        for (Double w : weights) {
-            sum += w;
+    public void printSoundCheck() {
+        for (Animal animal : animals) {
+            System.out.println(animal.getName() + " says: " + animal.makeSound());
         }
-        return sum / weights.size();
     }
 
-    public double calculateAverage(double[] weights) {
-        double sum = 0;
-        for (double w : weights) {
-            sum += w;
-        }
-        return sum / weights.length;
+    public void printHeavyAnimals() {
+        String heavyAnimals = WeightReportFormatter.formatHeavyAnimals(animals, 50);
+        System.out.println("Heavy animals: " + heavyAnimals);
     }
 }

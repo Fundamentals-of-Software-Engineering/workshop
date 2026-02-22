@@ -2,39 +2,23 @@ public class Animal {
 
     private String name;
     private double weight;
-    private String furColor; // all animals have fur right?
+    private SoundBehavior soundBehavior;
 
-    public Animal(String name, double weight, String furColor) {
+    public Animal(String name, double weight, SoundBehavior soundBehavior) {
         this.name = name;
         this.weight = weight;
-        this.furColor = furColor;
+        this.soundBehavior = soundBehavior;
     }
 
     public String makeSound() {
-        return "...";
+        return soundBehavior.makeSound();
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public double getWeight() {
         return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public String getFurColor() {
-        return furColor;
-    }
-
-    public void setFurColor(String furColor) {
-        this.furColor = furColor;
     }
 }
