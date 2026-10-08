@@ -1,0 +1,517 @@
+diff --git a/src/main/java/org/springframework/samples/petclinic/owner/Pet.java b/src/main/java/org/springframework/samples/petclinic/owner/Pet.java
+index 4f8409e..b3e7b5d 100644
+--- a/src/main/java/org/springframework/samples/petclinic/owner/Pet.java
++++ b/src/main/java/org/springframework/samples/petclinic/owner/Pet.java
+@@ -15,6 +15,7 @@
+  */
+ package org.springframework.samples.petclinic.owner;
+ 
++import java.math.BigDecimal;
+ import java.time.LocalDate;
+ import java.util.Collection;
+ import java.util.LinkedHashSet;
+@@ -49,6 +50,9 @@ public class Pet extends NamedEntity {
+ 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+ 	private LocalDate birthDate;
+ 
++	@Column(precision = 5, scale = 2)
++	private BigDecimal weight;
++
+ 	@ManyToOne
+ 	@JoinColumn(name = "type_id")
+ 	private PetType type;
+@@ -66,6 +70,14 @@ public class Pet extends NamedEntity {
+ 		return this.birthDate;
+ 	}
+ 
++	public BigDecimal getWeight() {
++		return this.weight;
++	}
++
++	public void setWeight(BigDecimal weight) {
++		this.weight = weight;
++	}
++
+ 	public PetType getType() {
+ 		return this.type;
+ 	}
+diff --git a/src/main/java/org/springframework/samples/petclinic/owner/PetController.java b/src/main/java/org/springframework/samples/petclinic/owner/PetController.java
+index 845c116..8ab47a3 100644
+--- a/src/main/java/org/springframework/samples/petclinic/owner/PetController.java
++++ b/src/main/java/org/springframework/samples/petclinic/owner/PetController.java
+@@ -192,6 +192,7 @@ class PetController {
+ 			existingPet.setName(pet.getName());
+ 			existingPet.setBirthDate(pet.getBirthDate());
+ 			existingPet.setType(pet.getType());
++			existingPet.setWeight(pet.getWeight());
+ 		}
+ 		else {
+ 			owner.addPet(pet);
+diff --git a/src/main/java/org/springframework/samples/petclinic/owner/PetValidator.java b/src/main/java/org/springframework/samples/petclinic/owner/PetValidator.java
+index db847c8..aa20c09 100644
+--- a/src/main/java/org/springframework/samples/petclinic/owner/PetValidator.java
++++ b/src/main/java/org/springframework/samples/petclinic/owner/PetValidator.java
+@@ -15,6 +15,8 @@
+  */
+ package org.springframework.samples.petclinic.owner;
+ 
++import java.math.BigDecimal;
++
+ import org.springframework.util.StringUtils;
+ import org.springframework.validation.Errors;
+ import org.springframework.validation.Validator;
+@@ -35,6 +37,8 @@ public class PetValidator implements Validator {
+ 
+ 	private static final int MAX_NAME_LENGTH = 30;
+ 
++	private static final BigDecimal MAX_WEIGHT = new BigDecimal("999.99");
++
+ 	@Override
+ 	public void validate(Object obj, Errors errors) {
+ 		Pet pet = (Pet) obj;
+@@ -56,6 +60,13 @@ public class PetValidator implements Validator {
+ 		if (pet.getBirthDate() == null) {
+ 			errors.rejectValue("birthDate", REQUIRED, REQUIRED);
+ 		}
++
++		// weight is optional, but when given it must be a sensible number of kilograms
++		BigDecimal weight = pet.getWeight();
++		if (weight != null && (weight.signum() <= 0 || weight.compareTo(MAX_WEIGHT) > 0
++				|| weight.stripTrailingZeros().scale() > 2)) {
++			errors.rejectValue("weight", "weight.invalid", "Weight must be between 0.01 and 999.99 kg");
++		}
+ 	}
+ 
+ 	/**
+diff --git a/src/main/resources/db/h2/data.sql b/src/main/resources/db/h2/data.sql
+index f232b13..ccaa1b7 100644
+--- a/src/main/resources/db/h2/data.sql
++++ b/src/main/resources/db/h2/data.sql
+@@ -33,19 +33,19 @@ INSERT INTO owners VALUES (default, 'Maria', 'Escobito', '345 Maple St.', 'Madis
+ INSERT INTO owners VALUES (default, 'David', 'Schroeder', '2749 Blackhawk Trail', 'Madison', '6085559435');
+ INSERT INTO owners VALUES (default, 'Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487');
+ 
+-INSERT INTO pets VALUES (default, 'Leo', '2010-09-07', 1, 1);
+-INSERT INTO pets VALUES (default, 'Basil', '2012-08-06', 6, 2);
+-INSERT INTO pets VALUES (default, 'Rosy', '2011-04-17', 2, 3);
+-INSERT INTO pets VALUES (default, 'Jewel', '2010-03-07', 2, 3);
+-INSERT INTO pets VALUES (default, 'Iggy', '2010-11-30', 3, 4);
+-INSERT INTO pets VALUES (default, 'George', '2010-01-20', 4, 5);
+-INSERT INTO pets VALUES (default, 'Samantha', '2012-09-04', 1, 6);
+-INSERT INTO pets VALUES (default, 'Max', '2012-09-04', 1, 6);
+-INSERT INTO pets VALUES (default, 'Lucky', '2011-08-06', 5, 7);
+-INSERT INTO pets VALUES (default, 'Mulligan', '2007-02-24', 2, 8);
+-INSERT INTO pets VALUES (default, 'Freddy', '2010-03-09', 5, 9);
+-INSERT INTO pets VALUES (default, 'Lucky', '2010-06-24', 2, 10);
+-INSERT INTO pets VALUES (default, 'Sly', '2012-06-08', 1, 10);
++INSERT INTO pets VALUES (default, 'Leo', '2010-09-07', 1, 1, NULL);
++INSERT INTO pets VALUES (default, 'Basil', '2012-08-06', 6, 2, NULL);
++INSERT INTO pets VALUES (default, 'Rosy', '2011-04-17', 2, 3, NULL);
++INSERT INTO pets VALUES (default, 'Jewel', '2010-03-07', 2, 3, NULL);
++INSERT INTO pets VALUES (default, 'Iggy', '2010-11-30', 3, 4, NULL);
++INSERT INTO pets VALUES (default, 'George', '2010-01-20', 4, 5, NULL);
++INSERT INTO pets VALUES (default, 'Samantha', '2012-09-04', 1, 6, NULL);
++INSERT INTO pets VALUES (default, 'Max', '2012-09-04', 1, 6, NULL);
++INSERT INTO pets VALUES (default, 'Lucky', '2011-08-06', 5, 7, NULL);
++INSERT INTO pets VALUES (default, 'Mulligan', '2007-02-24', 2, 8, NULL);
++INSERT INTO pets VALUES (default, 'Freddy', '2010-03-09', 5, 9, NULL);
++INSERT INTO pets VALUES (default, 'Lucky', '2010-06-24', 2, 10, NULL);
++INSERT INTO pets VALUES (default, 'Sly', '2012-06-08', 1, 10, NULL);
+ 
+ INSERT INTO visits VALUES (default, 7, '2013-01-01', 'rabies shot');
+ INSERT INTO visits VALUES (default, 8, '2013-01-02', 'rabies shot');
+diff --git a/src/main/resources/db/h2/schema.sql b/src/main/resources/db/h2/schema.sql
+index f53b168..8f6abdb 100644
+--- a/src/main/resources/db/h2/schema.sql
++++ b/src/main/resources/db/h2/schema.sql
+@@ -48,7 +48,8 @@ CREATE TABLE pets (
+   name       VARCHAR_IGNORECASE(30),
+   birth_date DATE,
+   type_id    INTEGER NOT NULL,
+-  owner_id   INTEGER
++  owner_id   INTEGER,
++  weight     DECIMAL(5,2)
+ );
+ ALTER TABLE pets ADD CONSTRAINT fk_pets_owners FOREIGN KEY (owner_id) REFERENCES owners (id);
+ ALTER TABLE pets ADD CONSTRAINT fk_pets_types FOREIGN KEY (type_id) REFERENCES types (id);
+diff --git a/src/main/resources/db/mysql/data.sql b/src/main/resources/db/mysql/data.sql
+index 3f1dcf8..63cba96 100644
+--- a/src/main/resources/db/mysql/data.sql
++++ b/src/main/resources/db/mysql/data.sql
+@@ -33,19 +33,19 @@ INSERT IGNORE INTO owners VALUES (8, 'Maria', 'Escobito', '345 Maple St.', 'Madi
+ INSERT IGNORE INTO owners VALUES (9, 'David', 'Schroeder', '2749 Blackhawk Trail', 'Madison', '6085559435');
+ INSERT IGNORE INTO owners VALUES (10, 'Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487');
+ 
+-INSERT IGNORE INTO pets VALUES (1, 'Leo', '2000-09-07', 1, 1);
+-INSERT IGNORE INTO pets VALUES (2, 'Basil', '2002-08-06', 6, 2);
+-INSERT IGNORE INTO pets VALUES (3, 'Rosy', '2001-04-17', 2, 3);
+-INSERT IGNORE INTO pets VALUES (4, 'Jewel', '2000-03-07', 2, 3);
+-INSERT IGNORE INTO pets VALUES (5, 'Iggy', '2000-11-30', 3, 4);
+-INSERT IGNORE INTO pets VALUES (6, 'George', '2000-01-20', 4, 5);
+-INSERT IGNORE INTO pets VALUES (7, 'Samantha', '1995-09-04', 1, 6);
+-INSERT IGNORE INTO pets VALUES (8, 'Max', '1995-09-04', 1, 6);
+-INSERT IGNORE INTO pets VALUES (9, 'Lucky', '1999-08-06', 5, 7);
+-INSERT IGNORE INTO pets VALUES (10, 'Mulligan', '1997-02-24', 2, 8);
+-INSERT IGNORE INTO pets VALUES (11, 'Freddy', '2000-03-09', 5, 9);
+-INSERT IGNORE INTO pets VALUES (12, 'Lucky', '2000-06-24', 2, 10);
+-INSERT IGNORE INTO pets VALUES (13, 'Sly', '2002-06-08', 1, 10);
++INSERT IGNORE INTO pets VALUES (1, 'Leo', '2000-09-07', 1, 1, NULL);
++INSERT IGNORE INTO pets VALUES (2, 'Basil', '2002-08-06', 6, 2, NULL);
++INSERT IGNORE INTO pets VALUES (3, 'Rosy', '2001-04-17', 2, 3, NULL);
++INSERT IGNORE INTO pets VALUES (4, 'Jewel', '2000-03-07', 2, 3, NULL);
++INSERT IGNORE INTO pets VALUES (5, 'Iggy', '2000-11-30', 3, 4, NULL);
++INSERT IGNORE INTO pets VALUES (6, 'George', '2000-01-20', 4, 5, NULL);
++INSERT IGNORE INTO pets VALUES (7, 'Samantha', '1995-09-04', 1, 6, NULL);
++INSERT IGNORE INTO pets VALUES (8, 'Max', '1995-09-04', 1, 6, NULL);
++INSERT IGNORE INTO pets VALUES (9, 'Lucky', '1999-08-06', 5, 7, NULL);
++INSERT IGNORE INTO pets VALUES (10, 'Mulligan', '1997-02-24', 2, 8, NULL);
++INSERT IGNORE INTO pets VALUES (11, 'Freddy', '2000-03-09', 5, 9, NULL);
++INSERT IGNORE INTO pets VALUES (12, 'Lucky', '2000-06-24', 2, 10, NULL);
++INSERT IGNORE INTO pets VALUES (13, 'Sly', '2002-06-08', 1, 10, NULL);
+ 
+ INSERT IGNORE INTO visits VALUES (1, 7, '2010-03-04', 'rabies shot');
+ INSERT IGNORE INTO visits VALUES (2, 8, '2011-03-04', 'rabies shot');
+diff --git a/src/main/resources/db/mysql/schema.sql b/src/main/resources/db/mysql/schema.sql
+index ed53056..8793fb1 100644
+--- a/src/main/resources/db/mysql/schema.sql
++++ b/src/main/resources/db/mysql/schema.sql
+@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS pets (
+   birth_date DATE,
+   type_id INT(4) UNSIGNED NOT NULL,
+   owner_id INT(4) UNSIGNED,
++  weight DECIMAL(5,2),
+   INDEX(name),
+   FOREIGN KEY (owner_id) REFERENCES owners(id),
+   FOREIGN KEY (type_id) REFERENCES types(id),
+diff --git a/src/main/resources/db/postgres/schema.sql b/src/main/resources/db/postgres/schema.sql
+index 05b450d..154fa08 100644
+--- a/src/main/resources/db/postgres/schema.sql
++++ b/src/main/resources/db/postgres/schema.sql
+@@ -38,8 +38,10 @@ CREATE TABLE IF NOT EXISTS pets (
+   name       TEXT,
+   birth_date DATE,
+   type_id    INT NOT NULL REFERENCES types (id),
+-  owner_id   INT REFERENCES owners (id)
++  owner_id   INT REFERENCES owners (id),
++  weight     NUMERIC(5,2)
+ );
++ALTER TABLE pets ADD COLUMN IF NOT EXISTS weight NUMERIC(5,2);
+ CREATE INDEX IF NOT EXISTS idx_pets_name ON pets (name);
+ CREATE INDEX IF NOT EXISTS idx_pets_owner_id ON pets (owner_id);
+ CREATE UNIQUE INDEX IF NOT EXISTS unique_owner_pet_name ON pets (owner_id, LOWER(name));
+diff --git a/src/main/resources/messages/messages.properties b/src/main/resources/messages/messages.properties
+index 070c9f0..a875839 100644
+--- a/src/main/resources/messages/messages.properties
++++ b/src/main/resources/messages/messages.properties
+@@ -36,6 +36,7 @@ layoutTitle=PetClinic :: a Spring Framework demonstration
+ pet=Pet
+ birthDate=Birth Date
+ type=Type
++weight=Weight
+ previousVisits=Previous Visits
+ date=Date
+ description=Description
+@@ -50,3 +51,4 @@ petsAndVisits=Pets and Visits
+ error.404=The requested page was not found.
+ error.500=An internal server error occurred.
+ error.general=An unexpected error occurred.
++typeMismatch.weight=Weight must be a number, like 4.5
+diff --git a/src/main/resources/messages/messages_de.properties b/src/main/resources/messages/messages_de.properties
+index a4698d3..45bc070 100644
+--- a/src/main/resources/messages/messages_de.properties
++++ b/src/main/resources/messages/messages_de.properties
+@@ -50,3 +50,5 @@ petsAndVisits=Haustiere und Besuche
+ error.404=Die angeforderte Seite wurde nicht gefunden.
+ error.500=Ein interner Serverfehler ist aufgetreten.
+ error.general=Ein unerwarteter Fehler ist aufgetreten.
++weight=Weight
++typeMismatch.weight=Weight must be a number, like 4.5
+diff --git a/src/main/resources/messages/messages_es.properties b/src/main/resources/messages/messages_es.properties
+index 9e3c293..c77995e 100644
+--- a/src/main/resources/messages/messages_es.properties
++++ b/src/main/resources/messages/messages_es.properties
+@@ -50,3 +50,5 @@ petsAndVisits=Mascotas y visitas
+ error.404=La página solicitada no fue encontrada.
+ error.500=Ocurrió un error interno del servidor.
+ error.general=Ocurrió un error inesperado.
++weight=Weight
++typeMismatch.weight=Weight must be a number, like 4.5
+diff --git a/src/main/resources/messages/messages_fa.properties b/src/main/resources/messages/messages_fa.properties
+index 2260298..192e71d 100644
+--- a/src/main/resources/messages/messages_fa.properties
++++ b/src/main/resources/messages/messages_fa.properties
+@@ -50,3 +50,5 @@ petsAndVisits=حیوانات و ویزیت‌ها
+ error.404=صفحه درخواستی پیدا نشد.
+ error.500=خطای داخلی سرور رخ داد.
+ error.general=خطای غیرمنتظره‌ای رخ داد.
++weight=Weight
++typeMismatch.weight=Weight must be a number, like 4.5
+diff --git a/src/main/resources/messages/messages_hi.properties b/src/main/resources/messages/messages_hi.properties
+index 8a22cc1..4357d46 100644
+--- a/src/main/resources/messages/messages_hi.properties
++++ b/src/main/resources/messages/messages_hi.properties
+@@ -52,3 +52,5 @@ petsAndVisits=\u092A\u093E\u0932\u0924\u0942 \u0914\u0930 \u092F\u093E\u0924\u09
+ error.404=\u0905\u0928\u0941\u0930\u094B\u0927\u093F\u0924 \u092A\u0943\u0937\u094D\u0920 \u0928\u0939\u0940\u0902 \u092E\u093F\u0932\u093E\u0964
+ error.500=\u090F\u0915 \u0906\u0902\u0924\u0930\u093F\u0915 \u0938\u0930\u094D\u0935\u0930 \u0924\u094D\u0930\u0941\u091F\u093F \u0939\u0941\u0906\u0964
+ error.general=\u090F\u0915 \u0905\u092A\u094D\u0930\u0924\u094D\u092F\u093E\u0936\u093F\u0924 \u0924\u094D\u0930\u0941\u091F\u093F \u0939\u0941\u0906\u0964
++weight=Weight
++typeMismatch.weight=Weight must be a number, like 4.5
+diff --git a/src/main/resources/messages/messages_ja.properties b/src/main/resources/messages/messages_ja.properties
+index e60d875..ec2af8d 100644
+--- a/src/main/resources/messages/messages_ja.properties
++++ b/src/main/resources/messages/messages_ja.properties
+@@ -52,3 +52,5 @@ petsAndVisits=ペットと診察
+ error.404=リクエストされたページが見つかりませんでした。
+ error.500=サーバー内部エラーが発生しました。
+ error.general=予期しないエラーが発生しました。
++weight=Weight
++typeMismatch.weight=Weight must be a number, like 4.5
+diff --git a/src/main/resources/messages/messages_ko.properties b/src/main/resources/messages/messages_ko.properties
+index b0f9f0d..deea1bd 100644
+--- a/src/main/resources/messages/messages_ko.properties
++++ b/src/main/resources/messages/messages_ko.properties
+@@ -50,3 +50,5 @@ petsAndVisits=반려동물 및 방문
+ error.404=요청하신 페이지를 찾을 수 없습니다.
+ error.500=서버 내부 오류가 발생했습니다.
+ error.general=알 수 없는 오류가 발생했습니다.
++weight=Weight
++typeMismatch.weight=Weight must be a number, like 4.5
+diff --git a/src/main/resources/messages/messages_pt.properties b/src/main/resources/messages/messages_pt.properties
+index c2efd77..81942dc 100644
+--- a/src/main/resources/messages/messages_pt.properties
++++ b/src/main/resources/messages/messages_pt.properties
+@@ -50,3 +50,5 @@ petsAndVisits=Animais e visitas
+ error.404=A página solicitada não foi encontrada.
+ error.500=Ocorreu um erro interno no servidor.
+ error.general=Ocorreu um erro inesperado.
++weight=Weight
++typeMismatch.weight=Weight must be a number, like 4.5
+diff --git a/src/main/resources/messages/messages_ru.properties b/src/main/resources/messages/messages_ru.properties
+index f667057..4fa2a02 100644
+--- a/src/main/resources/messages/messages_ru.properties
++++ b/src/main/resources/messages/messages_ru.properties
+@@ -50,3 +50,5 @@ petsAndVisits=Питомцы и визиты
+ error.404=Запрашиваемая страница не найдена.
+ error.500=Произошла внутренняя ошибка сервера.
+ error.general=Произошла непредвиденная ошибка.
++weight=Weight
++typeMismatch.weight=Weight must be a number, like 4.5
+diff --git a/src/main/resources/messages/messages_tr.properties b/src/main/resources/messages/messages_tr.properties
+index 9b1e9fa..e87e992 100644
+--- a/src/main/resources/messages/messages_tr.properties
++++ b/src/main/resources/messages/messages_tr.properties
+@@ -50,3 +50,5 @@ petsAndVisits=Evcil Hayvanlar ve Ziyaretler
+ error.404=İstenen sayfa bulunamadı.
+ error.500=Sunucuda dahili bir hata oluştu.
+ error.general=Beklenmeyen bir hata oluştu.
++weight=Weight
++typeMismatch.weight=Weight must be a number, like 4.5
+diff --git a/src/main/resources/templates/fragments/inputField.html b/src/main/resources/templates/fragments/inputField.html
+index 37a1c06..895a353 100644
+--- a/src/main/resources/templates/fragments/inputField.html
++++ b/src/main/resources/templates/fragments/inputField.html
+@@ -12,6 +12,7 @@
+           <div th:switch="${type}">
+             <input th:case="'text'" class="form-control" type="text" th:field="*{__${name}__}" />
+             <input th:case="'date'" class="form-control" type="date" th:field="*{__${name}__}" th:min="${minVisitDate}" />
++            <input th:case="'number'" class="form-control" type="number" step="0.01" th:field="*{__${name}__}" />
+           </div>
+           <span th:if="${valid}" class="fa fa-ok form-control-feedback" aria-hidden="true"></span>
+           <th:block th:if="${!valid}">
+diff --git a/src/main/resources/templates/owners/ownerDetails.html b/src/main/resources/templates/owners/ownerDetails.html
+index cc175cd..a9dd551 100644
+--- a/src/main/resources/templates/owners/ownerDetails.html
++++ b/src/main/resources/templates/owners/ownerDetails.html
+@@ -54,6 +54,8 @@
+           <dd th:text="${#temporals.format(pet.birthDate, 'yyyy-MM-dd')}"></dd>
+           <dt th:text="#{type}">Type</dt>
+           <dd th:text="${pet.type}"></dd>
++          <dt th:text="#{weight}">Weight</dt>
++          <dd th:text="${pet.weight != null} ? ${pet.weight} + ' kg' : ''"></dd>
+         </dl>
+       </td>
+       <td valign="top">
+diff --git a/src/main/resources/templates/pets/createOrUpdatePetForm.html b/src/main/resources/templates/pets/createOrUpdatePetForm.html
+index 396963d..272d279 100644
+--- a/src/main/resources/templates/pets/createOrUpdatePetForm.html
++++ b/src/main/resources/templates/pets/createOrUpdatePetForm.html
+@@ -19,6 +19,7 @@
+       </div>
+       <input th:replace="~{fragments/inputField :: input ('Name', 'name', 'text')}" />
+       <input th:replace="~{fragments/inputField :: input ('Birth Date', 'birthDate', 'date')}" />
++      <input th:replace="~{fragments/inputField :: input ('Weight (kg)', 'weight', 'number')}" />
+       <input th:replace="~{fragments/selectField :: select ('Type', 'type', ${types})}" />
+     </div>
+     <div class="form-group">
+diff --git a/src/test/java/org/springframework/samples/petclinic/owner/PetWeightTests.java b/src/test/java/org/springframework/samples/petclinic/owner/PetWeightTests.java
+new file mode 100644
+index 0000000..f9e6f86
+--- /dev/null
++++ b/src/test/java/org/springframework/samples/petclinic/owner/PetWeightTests.java
+@@ -0,0 +1,166 @@
++/*
++ * Copyright 2012-2025 the original author or authors.
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      https://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++package org.springframework.samples.petclinic.owner;
++
++import static org.hamcrest.MatcherAssert.assertThat;
++import static org.hamcrest.Matchers.comparesEqualTo;
++import static org.hamcrest.Matchers.containsString;
++import static org.hamcrest.Matchers.hasProperty;
++import static org.hamcrest.Matchers.not;
++import static org.hamcrest.Matchers.nullValue;
++import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
++import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
++import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
++import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
++import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
++import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
++
++import java.math.BigDecimal;
++
++import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.condition.DisabledInNativeImage;
++import org.junit.jupiter.params.ParameterizedTest;
++import org.junit.jupiter.params.provider.ValueSource;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.boot.test.context.SpringBootTest;
++import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
++import org.springframework.test.context.aot.DisabledInAotMode;
++import org.springframework.test.web.servlet.MockMvc;
++
++/**
++ * Acceptance tests for the pet weight feature. They go through the whole app and the H2
++ * database, not mocks, so they see what a real user would see. They compile before the
++ * feature exists and fail until it works.
++ */
++@SpringBootTest
++@AutoConfigureMockMvc
++@DisabledInNativeImage
++@DisabledInAotMode
++class PetWeightTests {
++
++	@Autowired
++	private MockMvc mockMvc;
++
++	@Autowired
++	private OwnerRepository owners;
++
++	private Pet reload(int ownerId, String petName) {
++		return this.owners.findById(ownerId).orElseThrow().getPet(petName);
++	}
++
++	@Test
++	void addingAPetSavesItsWeight() throws Exception {
++		mockMvc
++			.perform(post("/owners/{ownerId}/pets/new", 6).param("name", "Biscuit")
++				.param("type", "dog")
++				.param("birthDate", "2020-02-12")
++				.param("weight", "4.5"))
++			.andExpect(status().is3xxRedirection());
++
++		assertThat(reload(6, "Biscuit"), hasProperty("weight", comparesEqualTo(new BigDecimal("4.5"))));
++	}
++
++	@Test
++	void weightIsOptional() throws Exception {
++		mockMvc
++			.perform(post("/owners/{ownerId}/pets/new", 6).param("name", "Pickle")
++				.param("type", "cat")
++				.param("birthDate", "2021-03-01")
++				.param("weight", ""))
++			.andExpect(status().is3xxRedirection());
++
++		assertThat(reload(6, "Pickle"), hasProperty("weight", nullValue()));
++	}
++
++	@Test
++	void editingAPetUpdatesItsWeight() throws Exception {
++		mockMvc
++			.perform(post("/owners/{ownerId}/pets/{petId}/edit", 1, 1).param("name", "Leo")
++				.param("type", "cat")
++				.param("birthDate", "2010-09-07")
++				.param("weight", "5.2"))
++			.andExpect(status().is3xxRedirection());
++
++		assertThat(reload(1, "Leo"), hasProperty("weight", comparesEqualTo(new BigDecimal("5.2"))));
++	}
++
++	@Test
++	void editingAPetCanClearItsWeight() throws Exception {
++		mockMvc
++			.perform(post("/owners/{ownerId}/pets/{petId}/edit", 4, 5).param("name", "Iggy")
++				.param("type", "lizard")
++				.param("birthDate", "2010-11-30")
++				.param("weight", "1.2"))
++			.andExpect(status().is3xxRedirection());
++		mockMvc
++			.perform(post("/owners/{ownerId}/pets/{petId}/edit", 4, 5).param("name", "Iggy")
++				.param("type", "lizard")
++				.param("birthDate", "2010-11-30")
++				.param("weight", ""))
++			.andExpect(status().is3xxRedirection());
++
++		assertThat(reload(4, "Iggy"), hasProperty("weight", nullValue()));
++	}
++
++	@ParameterizedTest
++	@ValueSource(strings = { "0", "-1", "1000", "4.567" })
++	void rejectsAWeightOutsideTheRange(String weight) throws Exception {
++		mockMvc
++			.perform(post("/owners/{ownerId}/pets/new", 2).param("name", "Pebble " + weight)
++				.param("type", "hamster")
++				.param("birthDate", "2022-01-01")
++				.param("weight", weight))
++			.andExpect(status().isOk())
++			.andExpect(model().attributeHasFieldErrors("pet", "weight"))
++			.andExpect(view().name("pets/createOrUpdatePetForm"));
++	}
++
++	@Test
++	void rejectsAWeightThatIsNotANumberWithAFriendlyMessage() throws Exception {
++		mockMvc
++			.perform(post("/owners/{ownerId}/pets/new", 2).param("name", "Nugget")
++				.param("type", "hamster")
++				.param("birthDate", "2022-01-01")
++				.param("weight", "heavy"))
++			.andExpect(status().isOk())
++			.andExpect(model().attributeHasFieldErrorCode("pet", "weight", "typeMismatch"))
++			.andExpect(content().string(not(containsString("Failed to convert"))));
++	}
++
++	@Test
++	void ownerPageShowsTheWeightInKilograms() throws Exception {
++		mockMvc
++			.perform(post("/owners/{ownerId}/pets/{petId}/edit", 2, 2).param("name", "Basil")
++				.param("type", "hamster")
++				.param("birthDate", "2012-08-06")
++				.param("weight", "0.05"))
++			.andExpect(status().is3xxRedirection());
++
++		mockMvc.perform(get("/owners/{ownerId}", 2))
++			.andExpect(status().isOk())
++			.andExpect(content().string(containsString("0.05 kg")));
++	}
++
++	@Test
++	void ownerPageShowsNothingForAPetWithNoWeight() throws Exception {
++		mockMvc.perform(get("/owners/{ownerId}", 3))
++			.andExpect(status().isOk())
++			.andExpect(content().string(not(containsString("null"))))
++			.andExpect(content().string(not(containsString("0.00 kg"))));
++	}
++
++}
