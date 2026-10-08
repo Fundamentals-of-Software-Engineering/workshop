@@ -1,0 +1,11 @@
+name,ring,quadrant,isNew,description
+Claude Code,adopt,tools,FALSE,"My daily coding agent. Plan mode before every change I care about."
+AGENTS.md,adopt,techniques,TRUE,"One short file of rules my agents read before every task. I add a line when I correct the same thing twice."
+Failing test before the prompt,adopt,techniques,TRUE,"I write the acceptance test first. The agent does the green step."
+GitHub Copilot,trial,tools,FALSE,"Using it for code review on pull requests. Checking whether it catches what I catch."
+MCP servers,trial,platforms,TRUE,"Connecting my agent to docs and my issue tracker. Keeping only the ones I use every week."
+Spring AI,trial,languages & frameworks,TRUE,"Building one small feature with it at work before I recommend it."
+Local models with Ollama,assess,platforms,TRUE,"Could I run a model on my laptop for code that can't leave the building? Reading up first."
+Multi-agent workflows,assess,techniques,TRUE,"Agents that hand work to other agents. Interesting. I can't review that much code yet."
+Vibe coding for production code,hold,techniques,FALSE,"Fine for a throwaway prototype. Not for code someone else will maintain."
+A new AI tool every week,hold,tools,FALSE,"Random learning produces random results. I review this radar once a quarter instead."
