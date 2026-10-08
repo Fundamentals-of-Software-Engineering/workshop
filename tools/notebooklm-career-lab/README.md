@@ -2,8 +2,9 @@
 
 **Optional extra content.** Use it if there's time at the end of the day, or do it at home.
 
-Google renamed NotebookLM to **Gemini Notebook**. It's at https://notebook.google.com now. The old
-notebooklm.google.com address still works and takes you there.
+In July 2026, Google renamed NotebookLM to **Gemini Notebook**. It's at https://notebook.google.com
+now. The old https://notebooklm.google.com address still works and takes you there. It's the same
+tool, so any guide that says NotebookLM still applies.
 
 Pick a role you might want in three to five years. Use an AI research tool to learn what it takes.
 Then check what it told you.
@@ -14,7 +15,7 @@ only as good as your sources.
 
 ## What you need
 
-- A Google account
+- A Google account. If your work account can't open Gemini Notebook, use a personal one.
 - A browser
 - 15 minutes
 
@@ -27,14 +28,14 @@ Don't upload anything private from work. Check your company's policy first.
 1. Pick a role. Some ideas: Staff Engineer, Solutions Architect, Engineering Manager, Developer
    Advocate, Site Reliability Engineer.
 2. Go to https://notebook.google.com and create a new notebook.
-3. Add five to eight sources. Mix the types:
-   - Three or more real job postings for the role. If a link won't import, paste the text into a
+3. Add four to six sources. Don't spend more than 4 minutes here. Mix the types:
+   - Two or three real job postings for the role. If a link won't import, paste the text into a
      Google Doc, or save the page as a PDF, and add that.
    - A career guide or a blog post by someone who has the job
    - A conference talk on YouTube
    - Your own notes, or your current job description
 
-### Part 2: Research the role (6 min)
+### Part 2: Research the role with your notebook (6 min)
 
 Ask the notebook questions like these. Change them to fit your role.
 

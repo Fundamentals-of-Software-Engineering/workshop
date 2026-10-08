@@ -1,0 +1,2 @@
+# Keep the diffs in LF line endings on every OS, so git apply works on Windows too.
+*.diff text eol=lf

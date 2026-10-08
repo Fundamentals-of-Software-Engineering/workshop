@@ -12,12 +12,14 @@ Delete any section you don't need. Delete these comments when you're done.
 
 - What it is:
 - How the code is organized:
+- Where business rules live:
 - Where data lives and how the schema is managed:
 - Don't trust:
 
 ## Commands
 
-<!-- Exact commands. Agents guess these wrong all the time. -->
+<!-- Exact commands. Agents guess these wrong all the time.
+Your "Run it with" and "Test it with" lines from Read before you prompt go here. -->
 
 - Run:
 - Test one class:
@@ -50,7 +52,8 @@ Delete any section you don't need. Delete these comments when you're done.
 
 ## When I'm learning
 
-<!-- From Learn it, don't ship it. -->
+<!-- From Learn it, don't ship it. This one is about you, not the team.
+Move it to your personal instructions file before you commit. -->
 
 -
 -

@@ -11,21 +11,34 @@ didn't change what the clinic charges?
 
 Your job: build a safety net first. Then let the agent refactor, and see what your net catches.
 
-## Setup (5 minutes, or before the workshop)
+## Setup (2 minutes, before the clock starts)
 
-You need Git and Java 17 or newer. You don't need Docker for this lab.
+You need Git and Java 17 or newer. You don't need Docker.
+
+This assumes you cloned PetClinic and this repo side by side, as in
+[Before the workshop](../README.md#before-the-workshop). If you didn't, do that first.
+
+Start from a clean PetClinic folder. If `git status` shows changes from an earlier lab, run
+`git add -A` and then `git stash -u`. That puts your earlier work aside. Then, from the folder that
+holds both clones:
 
 ```bash
-git clone https://github.com/spring-projects/spring-petclinic.git
 cd spring-petclinic
-git checkout 500158f732419217507c7656904b8e6aa1bcc0d6
-git switch -c net-before-refactor
-git apply /path/to/workshop/net-before-refactor-lab/legacy-code.diff
+git switch -c net-before-refactor 500158f732419217507c7656904b8e6aa1bcc0d6
+git apply ../workshop/net-before-refactor-lab/legacy-code.diff
 git add src/main
 git commit -m "Add the legacy visit fee calculator"
 ```
 
-The commit matters. It gives you a clean point to come back to.
+`git apply` prints nothing when it works. The commit matters. It gives you a clean point to come back
+to. If Git asks who you are, run the two `git config` lines it shows you, then commit again.
+
+On Windows, run every command in this lab in Git Bash. It comes with Git for Windows. If `git apply`
+says "patch does not apply", Git changed the diff's line endings. Use this line instead:
+
+```bash
+sed 's/\r$//' ../workshop/net-before-refactor-lab/legacy-code.diff | git apply
+```
 
 Open `src/main/java/org/springframework/samples/petclinic/owner/VisitFeeCalculator.java`. That's the
 whole lab. It's under 90 lines.
@@ -35,8 +48,8 @@ whole lab. It's under 90 lines.
 A characterization test records what the code does today. Not what it should do. Not what the
 comment says. What it actually does.
 
-Michael Feathers named them in *Working Effectively with Legacy Code*. Chapter 6 calls the
-same idea test-driven refactoring:
+Michael Feathers named them in *Working Effectively with Legacy Code*. Chapter 6 of *Fundamentals
+of Software Engineering* calls the same idea test-driven refactoring:
 
 1. Write tests that pin down the current behavior.
 2. Run them. They must pass on the old code.
@@ -149,14 +162,19 @@ Now you can see if anyone touches them.
 
 ### Part 2: Let your agent refactor it (4 min)
 
-Give your agent this prompt. Don't mention your tests. We want to see what it does on its own.
+No agent on either laptop? Skip to Part 3.
+
+Start a fresh agent session. Give it this prompt. Don't mention your tests. We want to see what it
+does on its own.
 
 > Refactor VisitFeeCalculator so it's easier to read and change. Keep the behavior the same.
+
+If it asks to commit, say no. Part 3 needs its changes left uncommitted.
 
 When it's done:
 
 1. Read its summary. Does it say the behavior is the same?
-2. Run `git diff --stat`. Did it touch only the calculator? Did it touch your tests?
+2. Run `git status` and `git diff --stat`. Did it touch only the calculator? Did it touch your tests?
 3. Run your tests yourself: `./mvnw spring-javaformat:apply` then
    `./mvnw test -Dtest=VisitFeeCalculatorTests`.
 
@@ -177,22 +195,30 @@ have one, apply ours, and run your tests:
 
 ```bash
 git stash --include-untracked
-git apply /path/to/workshop/net-before-refactor-lab/agent-refactor.diff
+git apply ../workshop/net-before-refactor-lab/agent-refactor.diff
 ./mvnw test -Dtest=VisitFeeCalculatorTests
 ```
 
-Read the diff while the tests run: `git diff src/main`. Later, `git restore src/main` and then
-`git stash pop` bring your agent's version back.
+The first line says "No local changes to save" if you had no agent. That's fine.
+
+If `git apply` fails, check `git log --oneline -3`. Did your agent commit? Then start a branch from
+your tests commit and apply ours there: `git switch -c our-refactor <hash of your tests commit>`.
+On Windows, the `sed` line from Setup works here too. Use `agent-refactor.diff` in it.
+
+Read the diff while the tests run: `git diff src/main`.
 
 Did your net catch every change? If everything is green, your net has a hole. Find the change in the
 diff that your tests missed. Write the test that would have caught it. Then check it both ways:
 
 ```bash
+./mvnw spring-javaformat:apply               # format your new test
 git stash push src/main                      # back to the old code
 ./mvnw test -Dtest=VisitFeeCalculatorTests   # the new test must pass
 git stash pop                                # the refactor again
 ./mvnw test -Dtest=VisitFeeCalculatorTests   # the new test must fail
 ```
+
+Want your agent's version back after the lab? Run `git restore src/main`, then `git stash pop`.
 
 ### Part 4: Debrief (5 min)
 
@@ -222,4 +248,5 @@ Write three to five lines your agent should follow next time. For example:
 
 ## Answers
 
-Your facilitator has the answer key. Look at it only after Part 4.
+The answer key is `ANSWERS.md` in this lab's folder on the repo's `solution` branch. Look at it only
+after Part 4.

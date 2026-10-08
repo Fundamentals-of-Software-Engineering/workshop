@@ -22,19 +22,35 @@ cd spring-petclinic
 git checkout 500158f732419217507c7656904b8e6aa1bcc0d6
 ```
 
-If you did Read before you prompt, use the same clone. Each person starts a fresh agent session, so
-neither agent has seen the other's prompt.
+Already have the clone from an earlier lab? Defuse the grenade left it on another branch with
+changes. Set them aside and go back to the pinned commit:
+
+```bash
+git add -A
+git stash -u
+git checkout 500158f732419217507c7656904b8e6aa1bcc0d6
+```
+
+Run `git add -A` first. A plain `git stash -u` fails after the Defuse lab.
+
+Each person starts a fresh agent session, so neither agent has seen the other's prompt.
 
 ## The lab (20 minutes)
 
-Work in pairs. Decide who is **One-liner** and who is **Spec writer**. No agent? Pair with someone
-who has one and share it, one prompt after the other.
+Work in pairs. Decide who is **One-liner** and who is **Spec writer**. Both of you plan the same
+feature. Only the prompt is different.
+
+No agent? Pair with someone who has one and share it. Run the one-liner first. Then start a fresh
+session for the spec. Keep the spec file out of the PetClinic folder, so the first agent can't
+read it.
 
 ### Part 1: Two prompts (10 min)
 
 **One-liner.** Start now. Give your agent exactly this, in plan mode:
 
 > Add an optional weight field (in kg) to pets so we can track their health over time.
+
+No plan mode in your tool? Add one line after it: "Make a plan. Don't write code yet."
 
 Answer any questions it asks, as best you can. Read its plan. Write down:
 
@@ -52,6 +68,9 @@ Bullet points are fine. Look at the code when you need to. The two most importan
 - **Acceptance criteria, written as tests.** Name each test and say what it checks. The test name
   is the requirement.
 
+Fill in those two first. Do the rest if you have time. Don't open `example-spec.md` yet. It's a
+finished spec, and you'll see it in the debrief.
+
 Then give your agent the spec, in plan mode:
 
 > Here is a spec for a change to this codebase. Read it, then read the code it touches. Make a
@@ -61,7 +80,8 @@ Then give your agent the spec, in plan mode:
 
 ### Part 2: Compare (5 min)
 
-Put the two plans side by side. Score both with `rubric.md`. Then answer:
+Put the two plans side by side. If an agent built code, look at the diff too. Score both with
+`rubric.md`. Go fast. A quick score is fine. Then answer:
 
 - What did the one-line plan assume that the spec decided?
 - What did the spec miss that the agent caught?
@@ -84,22 +104,27 @@ Your facilitator will show an example spec and the tests that go with it. Talk a
 After the debrief, open `example-spec.md`. It ends with a test class, `PetWeightTests`. It compiles
 against the pinned PetClinic and fails until the feature works.
 
-1. Save it as `src/test/java/org/springframework/samples/petclinic/owner/PetWeightTests.java`.
-2. Run `./mvnw spring-javaformat:apply`. The build checks formatting, so pasted code can fail it.
-3. Run `./mvnw test -Dtest=PetWeightTests`. Watch it fail. That's the red step.
-4. Give your agent the green step:
+Start from a clean PetClinic. If an agent already changed the code, run `git stash -u` first.
+
+1. Copy the Java code at the end of `example-spec.md`. Save it as
+   `src/test/java/org/springframework/samples/petclinic/owner/PetWeightTests.java`.
+2. Copy `example-spec.md` into the PetClinic folder too, so your agent can read it.
+3. Run `./mvnw spring-javaformat:apply`. The build checks formatting, so pasted code can fail it.
+4. Run `./mvnw test -Dtest=PetWeightTests`. Ten of the 11 tests fail. That's the red step.
+5. Give your agent the green step:
 
    > Make PetWeightTests pass. Follow example-spec.md. Don't change the tests. Then run the full
    > test suite and tell me what you checked and what you didn't.
 
-5. Review the diff. Do the tests pass for the right reasons?
+6. Review the diff. Do the tests pass for the right reasons?
 
 The full test suite needs Docker for the MySQL and Postgres tests. Without Docker, run
 `./mvnw test -Dtest='!MySqlIntegrationTests,!PostgresIntegrationTests'`.
 
 ## Add to your AGENTS.md
 
-Write three to five lines about how your agent should plan a change. For example:
+Write three to five lines about how your agent should plan a change. Start from what the one-line
+plan missed. For example:
 
 ```markdown
 ## How to plan a change
@@ -116,4 +141,4 @@ Write three to five lines about how your agent should plan a change. For example
 |---|---|
 | `spec-template.md` | The blank spec. Copy it and fill it in. |
 | `rubric.md` | Score both plans in Part 2. |
-| `example-spec.md` | A finished spec for the weight feature. Open it in Part 3, not before. |
+| `example-spec.md` | A finished spec for the weight feature. Don't open it until the debrief. |

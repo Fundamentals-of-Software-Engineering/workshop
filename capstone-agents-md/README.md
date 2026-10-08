@@ -20,11 +20,14 @@ Open your notes from each lab. Find the "Add to your AGENTS.md" lines.
 
 | Lab | Section it fills |
 |---|---|
-| Read before you prompt | About this codebase |
+| Read before you prompt | About this codebase, and Commands |
 | Defuse the grenade | Review rules |
 | Spec it before you prompt | How to plan a change |
 | Net before refactor | Changing existing code |
 | Learn it, don't ship it | When I'm learning |
+
+The Read lab called its section "How this codebase is organized." It's the same section. Its "Run it
+with" and "Test it with" lines go under Commands.
 
 Missed a lab? Borrow lines from the example below, then make them yours.
 
@@ -43,24 +46,41 @@ Copy `AGENTS-template.md`. Fill it in. Then cut.
 
 ### Part 3: Test it on your agent (5 min)
 
-Give your agent the file and ask:
+Save the file as `AGENTS.md` at the root of the repo. Then start a new agent session, so it loads
+the file.
+
+| Agent | What to do |
+|---|---|
+| Claude Code | Nothing more if the repo has no `CLAUDE.md`. Claude Code reads `AGENTS.md` then. If there is a `CLAUDE.md`, add the line `@AGENTS.md` to it. |
+| GitHub Copilot | It reads `.github/copilot-instructions.md`. Many Copilot tools also read `AGENTS.md`. In VS Code, check that the `chat.useAgentsMdFile` setting is on. If your Copilot ignores it, copy the rules into `.github/copilot-instructions.md`. |
+| Cursor | Nothing more. Cursor reads `AGENTS.md` at the root. |
+| Codex | Nothing more. Codex reads `AGENTS.md` when it starts. |
+| No agent | Paste the file and the prompt below into any AI chat. Or swap files with a neighbor and answer the prompt for each other. |
+
+Then ask:
 
 > Read AGENTS.md. Which rules are unclear, conflict with each other, or can't be checked? Which
 > ones would you be most likely to ignore, and why?
 
-Fix what it finds. If you have time, give it a small task and see whether it follows the rules.
+Fix what it finds. If you have time, give it a small task and watch whether it follows the rules.
+In PetClinic, try this:
 
-### Part 4: Share (2 min)
+> Plan how you would add an email address to Owner. Don't write any code yet.
+
+Did it list its assumptions? Did it find all three `schema.sql` files? Did it name the tests first?
+
+### Part 4: Share one rule (2 min)
 
 Read your best line to your neighbor. Steal one of theirs.
 
 ## Take it home
 
 - **Where it goes.** Put team rules in `AGENTS.md` at the root of the repo, and commit it. Claude
-  Code reads `CLAUDE.md` instead. Put the line `@AGENTS.md` in it to pull this file in. Check your
-  tool's docs for its name.
+  Code, Cursor and Codex read it. So do many Copilot tools. If your repo also has a `CLAUDE.md`,
+  add the line `@AGENTS.md` to it, or Claude Code skips `AGENTS.md`.
 - **Team rules and personal rules are different.** "When I'm learning" is about you. Put it in your
-  tool's personal instructions file, not in the team repo.
+  tool's personal instructions file, not in the team repo. For Claude Code that's
+  `~/.claude/CLAUDE.md`. For Codex it's `~/.codex/AGENTS.md`. For other tools, check their docs.
 - **Grow it from pain.** When you correct your agent twice for the same thing, add a line. When a
   line stops mattering, delete it.
 - **Treat it like code.** Review changes to it. Out-of-date instructions mislead an agent the same
