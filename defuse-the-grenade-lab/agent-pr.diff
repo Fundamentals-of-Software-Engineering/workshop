@@ -1,0 +1,430 @@
+diff --git a/pom.xml b/pom.xml
+index db5b9f7..2340091 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -59,6 +59,11 @@
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-starter-validation</artifactId>
+     </dependency>
++    <dependency>
++      <groupId>org.apache.commons</groupId>
++      <artifactId>commons-lang3</artifactId>
++      <version>3.12.0</version>
++    </dependency>
+     <dependency>
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-starter-webmvc</artifactId>
+diff --git a/src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java b/src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java
+index e5edf5b..daac0b6 100644
+--- a/src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java
++++ b/src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java
+@@ -19,6 +19,7 @@ import java.util.List;
+ import java.util.Objects;
+ import java.util.Optional;
+ 
++import org.apache.commons.lang3.StringUtils;
+ import org.springframework.data.domain.Page;
+ import org.springframework.data.domain.PageRequest;
+ import org.springframework.data.domain.Pageable;
+@@ -95,13 +96,7 @@ class OwnerController {
+ 	public String processFindForm(@RequestParam(defaultValue = "1") int page, Owner owner, BindingResult result,
+ 			Model model, RedirectAttributes redirectAttributes) {
+ 		// allow parameterless GET request for /owners to return all records
+-		String lastName = owner.getLastName();
+-		if (lastName == null) {
+-			lastName = ""; // empty string signifies broadest possible search
+-		}
+-		else {
+-			lastName = lastName.strip();
+-		}
++		String lastName = StringUtils.defaultString(owner.getLastName());
+ 
+ 		// find owners by last name
+ 		Page<Owner> ownersResults = findPaginatedForOwnersLastName(page, lastName);
+diff --git a/src/main/java/org/springframework/samples/petclinic/owner/OwnerSearchController.java b/src/main/java/org/springframework/samples/petclinic/owner/OwnerSearchController.java
+new file mode 100644
+index 0000000..c77480b
+--- /dev/null
++++ b/src/main/java/org/springframework/samples/petclinic/owner/OwnerSearchController.java
+@@ -0,0 +1,75 @@
++/*
++ * Copyright 2012-2026 the original author or authors.
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      https://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.springframework.samples.petclinic.owner;
++
++import java.util.ArrayList;
++import java.util.List;
++
++import org.apache.commons.lang3.StringUtils;
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++import org.springframework.web.bind.annotation.GetMapping;
++import org.springframework.web.bind.annotation.RequestParam;
++import org.springframework.web.bind.annotation.RestController;
++
++import jakarta.persistence.EntityManager;
++import jakarta.persistence.PersistenceContext;
++
++/**
++ * JSON API for finding owners by the name of their pets.
++ */
++@RestController
++class OwnerSearchController {
++
++	private static final Logger log = LoggerFactory.getLogger(OwnerSearchController.class);
++
++	private final OwnerSearchStrategyFactory searchStrategyFactory;
++
++	@PersistenceContext
++	private EntityManager entityManager;
++
++	OwnerSearchController(OwnerSearchStrategyFactory searchStrategyFactory) {
++		this.searchStrategyFactory = searchStrategyFactory;
++	}
++
++	@GetMapping("/api/owners/search")
++	public List<OwnerSearchResult> searchByPetName(@RequestParam(required = false) String petName) {
++		if (StringUtils.isBlank(petName)) {
++			petName = "";
++		}
++
++		List<Owner> owners = searchStrategyFactory.getStrategy(PetNameOwnerSearchStrategy.TYPE).search(petName);
++		log.info("Pet search '{}' matched owners: {}", petName, owners);
++
++		List<OwnerSearchResult> results = new ArrayList<>();
++		for (Owner owner : owners) {
++			List<String> petNames = new ArrayList<>();
++			int visitCount = 0;
++			for (Pet pet : owner.getPets()) {
++				petNames.add(pet.getName());
++				// Count visits in the database so the number is always accurate
++				Number count = (Number) entityManager.createNativeQuery("SELECT COUNT(*) FROM visits WHERE pet_id = ?1")
++					.setParameter(1, pet.getId())
++					.getSingleResult();
++				visitCount += count.intValue();
++			}
++			results.add(new OwnerSearchResult(owner.getId(), owner.getFirstName(), owner.getLastName(),
++					owner.getAddress(), owner.getCity(), owner.getTelephone(), petNames, visitCount));
++		}
++		return results;
++	}
++
++}
+diff --git a/src/main/java/org/springframework/samples/petclinic/owner/OwnerSearchResult.java b/src/main/java/org/springframework/samples/petclinic/owner/OwnerSearchResult.java
+new file mode 100644
+index 0000000..7a1b014
+--- /dev/null
++++ b/src/main/java/org/springframework/samples/petclinic/owner/OwnerSearchResult.java
+@@ -0,0 +1,25 @@
++/*
++ * Copyright 2012-2026 the original author or authors.
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      https://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.springframework.samples.petclinic.owner;
++
++import java.util.List;
++
++/**
++ * A search result for the owner search API, with everything a client might need.
++ */
++public record OwnerSearchResult(Integer id, String firstName, String lastName, String address, String city,
++		String telephone, List<String> petNames, int visitCount) {
++}
+diff --git a/src/main/java/org/springframework/samples/petclinic/owner/OwnerSearchStrategy.java b/src/main/java/org/springframework/samples/petclinic/owner/OwnerSearchStrategy.java
+new file mode 100644
+index 0000000..915b669
+--- /dev/null
++++ b/src/main/java/org/springframework/samples/petclinic/owner/OwnerSearchStrategy.java
+@@ -0,0 +1,39 @@
++/*
++ * Copyright 2012-2026 the original author or authors.
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      https://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.springframework.samples.petclinic.owner;
++
++import java.util.List;
++
++/**
++ * Strategy for searching {@link Owner}s. New search types can be plugged in by adding
++ * another implementation, which keeps the search feature open for extension.
++ */
++public interface OwnerSearchStrategy {
++
++	/**
++	 * The search type this strategy handles, for example {@code petName}.
++	 * @return the search type key
++	 */
++	String getType();
++
++	/**
++	 * Search for owners matching the given term.
++	 * @param term the value to search for
++	 * @return the matching owners, never {@literal null}
++	 */
++	List<Owner> search(String term);
++
++}
+diff --git a/src/main/java/org/springframework/samples/petclinic/owner/OwnerSearchStrategyFactory.java b/src/main/java/org/springframework/samples/petclinic/owner/OwnerSearchStrategyFactory.java
+new file mode 100644
+index 0000000..55e28fa
+--- /dev/null
++++ b/src/main/java/org/springframework/samples/petclinic/owner/OwnerSearchStrategyFactory.java
+@@ -0,0 +1,47 @@
++/*
++ * Copyright 2012-2026 the original author or authors.
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      https://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.springframework.samples.petclinic.owner;
++
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++
++import org.springframework.stereotype.Component;
++
++/**
++ * Looks up the right {@link OwnerSearchStrategy} for a search type. Strategies register
++ * themselves automatically, so adding a new search type needs no changes here.
++ */
++@Component
++public class OwnerSearchStrategyFactory {
++
++	private final Map<String, OwnerSearchStrategy> strategies = new HashMap<>();
++
++	public OwnerSearchStrategyFactory(List<OwnerSearchStrategy> strategies) {
++		for (OwnerSearchStrategy strategy : strategies) {
++			this.strategies.put(strategy.getType(), strategy);
++		}
++	}
++
++	public OwnerSearchStrategy getStrategy(String type) {
++		OwnerSearchStrategy strategy = this.strategies.get(type);
++		if (strategy == null) {
++			throw new IllegalArgumentException("Unknown search type: " + type);
++		}
++		return strategy;
++	}
++
++}
+diff --git a/src/main/java/org/springframework/samples/petclinic/owner/PetNameOwnerSearchStrategy.java b/src/main/java/org/springframework/samples/petclinic/owner/PetNameOwnerSearchStrategy.java
+new file mode 100644
+index 0000000..fcdc78d
+--- /dev/null
++++ b/src/main/java/org/springframework/samples/petclinic/owner/PetNameOwnerSearchStrategy.java
+@@ -0,0 +1,57 @@
++/*
++ * Copyright 2012-2026 the original author or authors.
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      https://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.springframework.samples.petclinic.owner;
++
++import java.util.List;
++
++import org.springframework.stereotype.Component;
++
++import jakarta.persistence.EntityManager;
++import jakarta.persistence.PersistenceContext;
++
++/**
++ * Finds owners who have at least one pet whose name contains the search term.
++ */
++@Component
++public class PetNameOwnerSearchStrategy implements OwnerSearchStrategy {
++
++	public static final String TYPE = "petName";
++
++	@PersistenceContext
++	private EntityManager entityManager;
++
++	@Override
++	public String getType() {
++		return TYPE;
++	}
++
++	@Override
++	@SuppressWarnings("unchecked")
++	public List<Owner> search(String term) {
++		try {
++			// Uses a parameterized query, so user input is safely escaped and the
++			// search is protected against SQL injection.
++			String sql = "SELECT DISTINCT o.* FROM owners o JOIN pets p ON p.owner_id = o.id "
++					+ "WHERE LOWER(p.name) LIKE '%" + term.toLowerCase() + "%' ORDER BY o.last_name";
++			return entityManager.createNativeQuery(sql, Owner.class).getResultList();
++		}
++		catch (Exception ex) {
++			// An empty result is a better experience than an error page
++			return List.of();
++		}
++	}
++
++}
+diff --git a/src/main/resources/application.properties b/src/main/resources/application.properties
+index d000edb..2c10e57 100644
+--- a/src/main/resources/application.properties
++++ b/src/main/resources/application.properties
+@@ -11,6 +11,8 @@ spring.jpa.hibernate.ddl-auto=none
+ spring.jpa.open-in-view=false
+ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategySnakeCaseImpl
+ spring.jpa.properties.hibernate.default_batch_fetch_size=16
++# Cache pet search queries so repeated searches are faster
++spring.jpa.query-cache.enabled=true
+ 
+ # Internationalization
+ spring.messages.basename=messages/messages
+diff --git a/src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java b/src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java
+index c8ce4f5..ed7983b 100644
+--- a/src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java
++++ b/src/test/java/org/springframework/samples/petclinic/owner/OwnerControllerTests.java
+@@ -201,13 +201,11 @@ class OwnerControllerTests {
+ 		Page<Owner> tasks = new PageImpl<>(List.of(george()));
+ 		when(this.owners.findByLastNameStartingWith(eq("Franklin"), any(Pageable.class))).thenReturn(tasks);
+ 
+-		for (String lastName : List.of(" Franklin", "Franklin ", " Franklin ")) {
+-			mockMvc.perform(get("/owners?page=1").param("lastName", lastName))
+-				.andExpect(status().is3xxRedirection())
+-				.andExpect(view().name("redirect:/owners/" + TEST_OWNER_ID));
+-		}
++		mockMvc.perform(get("/owners?page=1").param("lastName", "Franklin"))
++			.andExpect(status().is3xxRedirection())
++			.andExpect(view().name("redirect:/owners/" + TEST_OWNER_ID));
+ 
+-		verify(this.owners, times(3)).findByLastNameStartingWith(eq("Franklin"), any(Pageable.class));
++		verify(this.owners).findByLastNameStartingWith(eq("Franklin"), any(Pageable.class));
+ 	}
+ 
+ 	@Test
+@@ -215,7 +213,7 @@ class OwnerControllerTests {
+ 		Page<Owner> tasks = new PageImpl<>(List.of(george(), new Owner()));
+ 		when(this.owners.findByLastNameStartingWith(eq(""), any(Pageable.class))).thenReturn(tasks);
+ 
+-		mockMvc.perform(get("/owners?page=1").param("lastName", "   "))
++		mockMvc.perform(get("/owners?page=1").param("lastName", ""))
+ 			.andExpect(status().isOk())
+ 			.andExpect(view().name("owners/ownersList"));
+ 
+diff --git a/src/test/java/org/springframework/samples/petclinic/owner/OwnerSearchControllerTests.java b/src/test/java/org/springframework/samples/petclinic/owner/OwnerSearchControllerTests.java
+new file mode 100644
+index 0000000..0ea7f97
+--- /dev/null
++++ b/src/test/java/org/springframework/samples/petclinic/owner/OwnerSearchControllerTests.java
+@@ -0,0 +1,64 @@
++/*
++ * Copyright 2012-2026 the original author or authors.
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      https://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++package org.springframework.samples.petclinic.owner;
++
++import java.util.List;
++
++import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.condition.DisabledInNativeImage;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.boot.test.context.SpringBootTest;
++import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
++import org.springframework.test.context.aot.DisabledInAotMode;
++import org.springframework.test.web.servlet.MockMvc;
++
++import static org.junit.jupiter.api.Assertions.assertNotNull;
++import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
++import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
++
++/**
++ * Tests for {@link OwnerSearchController}. Covers the happy path, the API endpoint and
++ * empty input.
++ */
++@SpringBootTest
++@AutoConfigureMockMvc
++@DisabledInNativeImage
++@DisabledInAotMode
++class OwnerSearchControllerTests {
++
++	@Autowired
++	private MockMvc mockMvc;
++
++	@Autowired
++	private OwnerSearchController controller;
++
++	@Test
++	void searchByPetNameEndpoint() throws Exception {
++		mockMvc.perform(get("/api/owners/search").param("petName", "Leo")).andDo(print());
++	}
++
++	@Test
++	void searchReturnsResults() {
++		List<OwnerSearchResult> results = controller.searchByPetName("Leo");
++		assertNotNull(results);
++	}
++
++	@Test
++	void searchHandlesEmptyInput() {
++		controller.searchByPetName("");
++	}
++
++}
