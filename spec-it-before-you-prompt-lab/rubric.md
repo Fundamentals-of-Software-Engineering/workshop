@@ -10,9 +10,9 @@ codebase. Check the code when you're not sure. A plan can sound right and still 
 | 3 | Define a valid weight: range, decimals, and what happens with bad input? | | |
 | 4 | Validate where the form actually checks it? (Look at `@InitBinder` in `PetController`.) | | |
 | 5 | Cover editing a pet, not just adding one? (Look at `updatePetDetails`.) | | |
-| 6 | Change the schema and the seed data for every database the app supports? | | |
+| 6 | Change the schema for every database the app supports, and fix the seed data that breaks? | | |
 | 7 | Cover the form field and how the owner page shows the weight? | | |
-| 8 | Handle labels and messages in every language file? | | |
+| 8 | Handle labels and messages in every language file that needs them? | | |
 | 9 | Name real tests, and keep the existing tests as they are? | | |
 | 10 | Stay in scope? No extra API, no history table, no new dependency you didn't ask for. | | |
 | 11 | Follow patterns already in the codebase instead of inventing new ones? | | |

@@ -18,12 +18,21 @@ git checkout 500158f732419217507c7656904b8e6aa1bcc0d6
 
 That commit is from September 29, 2026. Everyone in the room reads the same code.
 
-Optional: run it. `./mvnw spring-boot:run`, then open http://localhost:8080. The first run downloads
-dependencies, so start it before the lab.
+Run it if you can. You'll want it in Part 2, to check URLs. The first run downloads dependencies,
+so start it before the lab.
+
+```bash
+./mvnw spring-boot:run
+```
+
+On Windows, use `mvnw spring-boot:run` (Command Prompt) or `.\mvnw spring-boot:run` (PowerShell).
+Then open http://localhost:8080. Stop it with Ctrl+C.
 
 ## The lab (25 minutes)
 
 Work alone or in pairs.
+
+You're done when you have your Part 1 answers, your three sentences and the Part 2 table filled in.
 
 ### Part 1: Read it yourself (12 min)
 
@@ -32,7 +41,7 @@ No AI for this part. Not in the IDE, not in a browser tab. You're building the m
 Use your IDE: go to definition, find usages, search. Write short answers. You won't finish
 everything, and that's fine.
 
-**Orientation (3 min)**
+**Orientation (2 min)**
 
 1. Without running anything, what technologies can you name from the project files? Look at
    `pom.xml` first. Then look at what else sits in the root folder.
@@ -135,4 +144,5 @@ your own codebase at work.
 
 ## Answers
 
-Your facilitator has the answer key. Look at it only after Part 3.
+The answer key is `ANSWERS.md` in this lab's folder on the repo's `solution` branch. Look at it only
+after Part 3.

@@ -55,8 +55,10 @@ Use these if there's time, or take them home.
 
 ## Before the workshop
 
-Clone PetClinic and this repo, and build PetClinic once so the dependencies download before you
-arrive:
+Clone PetClinic and this repo. Build PetClinic and the Learn it lab's starter once, so the
+dependencies download before you arrive. Conference Wi-Fi is slow.
+
+macOS and Linux:
 
 ```bash
 git clone https://github.com/spring-projects/spring-petclinic.git
@@ -65,7 +67,27 @@ git checkout 500158f732419217507c7656904b8e6aa1bcc0d6
 ./mvnw -DskipTests package
 cd ..
 git clone https://github.com/Fundamentals-of-Software-Engineering/workshop.git
+cd workshop/learn-it-dont-ship-it-lab/starter
+./mvnw test
 ```
+
+Windows (PowerShell or Command Prompt):
+
+```bat
+git clone https://github.com/spring-projects/spring-petclinic.git
+cd spring-petclinic
+git checkout 500158f732419217507c7656904b8e6aa1bcc0d6
+.\mvnw.cmd -DskipTests package
+cd ..
+git clone https://github.com/Fundamentals-of-Software-Engineering/workshop.git
+cd workshop\learn-it-dont-ship-it-lab\starter
+.\mvnw.cmd test
+```
+
+Git will say you're in "detached HEAD" state after the checkout. That's expected.
+
+Both builds should end with `BUILD SUCCESS`. The second one says `Tests run: 0`. That's expected
+too. If a build says your Java is too old, install Java 17 or newer and set `JAVA_HOME` to it.
 
 ## Answers
 

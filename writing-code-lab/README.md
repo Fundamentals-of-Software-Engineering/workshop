@@ -45,14 +45,14 @@ Share what you found with your neighbor. Did you catch the same things? Differen
 |-----------|-----------|
 | Meaningful Names | Names should reveal intent (`elapsedTimeInDays` not `d`) |
 | Small Methods | Each method should do one thing |
-| DRY | Don't repeat yourself — extract shared logic |
+| DRY | Don't repeat yourself. extract shared logic |
 | Comments | Don't restate the code; explain *why*, not *what* |
 | Formatting | Indentation should reflect actual control flow |
 | Favor Composition | Prefer composition over inheritance when "is-a" doesn't hold |
 
 ## Solution
 
-A refactored version is available on the `solution` branch. There's no single "right" answer — look at it after you've done your own refactoring to compare approaches.
+A refactored version is available on the `solution` branch. There's no single "right" answer. look at it after you've done your own refactoring to compare approaches.
 
 ```bash
 git checkout solution

@@ -22,11 +22,11 @@ You need Java 17 or newer. Maven comes with the project.
 
 ```bash
 ./mvnw test          # macOS and Linux
-mvnw.cmd test        # Windows
+.\mvnw.cmd test      # Windows
 ```
 
-The first run downloads ArchUnit. Before you start, you should see `Tests run: 0` and
-`BUILD SUCCESS`. That's expected. There are no rules yet.
+The first run downloads Maven and ArchUnit, so you need wifi. Before you start, you should see
+`Tests run: 0` and `BUILD SUCCESS`. That's expected. There are no rules yet.
 
 ## What to build
 

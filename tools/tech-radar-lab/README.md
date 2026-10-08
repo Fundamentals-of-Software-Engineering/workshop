@@ -21,6 +21,8 @@ based on how ready they are. You'll do the same for yourself.
 Place each item where **you** are with it, not where the industry is. Hold isn't "bad." It's "not
 now."
 
+Thoughtworks now calls its outer ring **Caution**. For a personal radar, Hold still fits.
+
 ## The lab (10 minutes)
 
 ### Part 1: Look at a real radar (2 min)
@@ -40,7 +42,11 @@ There are no wrong answers. This is your radar.
 3. Include at least two AI tools or practices. Put at least one thing in Hold.
 4. Mark what's new to you since last quarter.
 
-See `sample-radar.csv` in this folder for an example with AI tools.
+See `sample-radar.csv` in this folder for an example with AI tools. To see it drawn as a radar,
+open this link:
+[the sample radar](https://radar.thoughtworks.com/?documentId=https%3A%2F%2Fraw.githubusercontent.com%2FFundamentals-of-Software-Engineering%2Fworkshop%2Fmain%2Ftools%2Ftech-radar-lab%2Fsample-radar.csv).
+
+Don't try to draw your own radar now. Paper is faster. Drawing it is a take-home step, below.
 
 ### Part 3: Share (2 min)
 
@@ -60,8 +66,14 @@ Sheet, a CSV or a JSON file.
 - A CSV has to be at a public URL, like a GitHub gist's raw link. A Google Sheet has to be shared.
   Don't put anything private in it.
 
-The easiest start is to copy `sample-radar.csv` into a Google Sheet, change it, share it, and paste
-the link into the tool.
+The easiest start:
+
+1. In Google Sheets, create a blank sheet. Choose File, then Import, and upload `sample-radar.csv`.
+2. Replace the rows with your own. Keep the header row as it is.
+3. Click Share. Set General access to "Anyone with the link" as a Viewer.
+4. Paste the sheet's link into https://radar.thoughtworks.com and click "Build my radar."
+
+No Google account? Put your CSV in a public GitHub gist. Paste the gist's raw link into the tool.
 
 ## Tips
 
