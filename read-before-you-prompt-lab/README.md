@@ -88,8 +88,3 @@ Nothing to write now. In the capstone, you'll turn what you learned into lines l
 - Run it with ___. Test it with ___.
 - Don't trust ___. (Something the docs or your agent got wrong.)
 ```
-
-## Answers
-
-The answer key is `ANSWERS.md` in this lab's folder on the repo's `solution` branch. Look at it only
-after Part 3.

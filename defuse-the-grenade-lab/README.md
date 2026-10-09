@@ -144,8 +144,3 @@ Part 3. Keep them. The capstone uses them.
 ```
 
 </details>
-
-## Answers
-
-The answer key is `ANSWERS.md` in this lab's folder on the repo's `solution` branch. Look at it only
-after Part 3.
