@@ -20,14 +20,14 @@ Open your notes from each lab. Find the "Add to your AGENTS.md" lines.
 
 | Lab | Section it fills |
 |---|---|
-| Read before you prompt | About this codebase, and Commands |
+| Read before you prompt | About this codebase, and Commands. Write these now, from what you learned exploring PetClinic. |
 | Defuse the grenade | Review rules |
 | Spec it before you prompt | How to plan a change |
 | Net before refactor | Changing existing code |
 | Learn it, don't ship it | When I'm learning |
 
-The Read lab called its section "How this codebase is organized." It's the same section. Its "Run it
-with" and "Test it with" lines go under Commands.
+For the Read lab, think about how the code is organized, how to run and test it, and what your
+agent or the docs got wrong.
 
 Missed a lab? Borrow lines from the example below, then make them yours.
 
