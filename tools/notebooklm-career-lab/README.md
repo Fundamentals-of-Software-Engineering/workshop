@@ -17,25 +17,24 @@ only as good as your sources.
 
 - A Google account. If your work account can't open Gemini Notebook, use a personal one.
 - A browser
-- 15 minutes
 
 Don't upload anything private from work. Check your company's policy first.
 
-## The lab (15 minutes)
+## The lab
 
-### Part 1: Pick a role and gather sources (4 min)
+### Part 1: Pick a role and gather sources
 
 1. Pick a role. Some ideas: Staff Engineer, Solutions Architect, Engineering Manager, Developer
    Advocate, Site Reliability Engineer.
 2. Go to https://notebook.google.com and create a new notebook.
-3. Add four to six sources. Don't spend more than 4 minutes here. Mix the types:
+3. Add four to six sources. Don't spend long here. Mix the types:
    - Two or three real job postings for the role. If a link won't import, paste the text into a
      Google Doc, or save the page as a PDF, and add that.
    - A career guide or a blog post by someone who has the job
    - A conference talk on YouTube
    - Your own notes, or your current job description
 
-### Part 2: Research the role with your notebook (6 min)
+### Part 2: Research the role with your notebook
 
 Ask the notebook questions like these. Change them to fit your role.
 
@@ -48,7 +47,7 @@ Ask the notebook questions like these. Change them to fit your role.
 
 For each answer, click one citation and read the source. Did the source really say that?
 
-### Part 3: Compare with a plain search (3 min)
+### Part 3: Compare with a plain search
 
 Ask one of the same questions in a search engine or a general chatbot with no sources. Compare:
 
@@ -56,7 +55,7 @@ Ask one of the same questions in a search engine or a general chatbot with no so
 - Which one could you check?
 - Did either one make something up?
 
-### Part 4: Make a plan (2 min)
+### Part 4: Make a plan
 
 Ask:
 

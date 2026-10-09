@@ -6,7 +6,7 @@ Today you need to know how it works.
 First you read it yourself, with no AI. Then you ask your agent the same questions and compare. You
 can only judge what the agent tells you if you know the code. This lab is where you get that.
 
-## Setup (5 minutes, or before the workshop)
+## Setup (before the lab, or before the workshop)
 
 You need Git and Java 17 or newer. An IDE helps a lot.
 
@@ -28,20 +28,20 @@ so start it before the lab.
 On Windows, use `mvnw spring-boot:run` (Command Prompt) or `.\mvnw spring-boot:run` (PowerShell).
 Then open http://localhost:8080. Stop it with Ctrl+C.
 
-## The lab (25 minutes)
+## The lab
 
 Work alone or in pairs.
 
 You're done when you have your Part 1 answers, your three sentences and the Part 2 table filled in.
 
-### Part 1: Read it yourself (12 min)
+### Part 1: Read it yourself
 
 No AI for this part. Not in the IDE, not in a browser tab. You're building the muscle first.
 
 Use your IDE: go to definition, find usages, search. Write short answers. You won't finish
 everything, and that's fine.
 
-**Orientation (2 min)**
+**Orientation**
 
 1. Without running anything, what technologies can you name from the project files? Look at
    `pom.xml` first. Then look at what else sits in the root folder.
@@ -49,7 +49,7 @@ everything, and that's fine.
 3. Look at the package names under `src/main/java`. Is the code grouped by layer (all controllers
    together) or by feature?
 
-**Navigation (5 min)**
+**Navigation**
 
 4. Trace the `Pet` entity. Fill in this table. Write "none" if a layer doesn't exist.
 
@@ -65,7 +65,7 @@ everything, and that's fine.
    or somewhere else?
 6. Where is the database configured? Which database runs by default? What creates the tables?
 
-**Patterns (4 min)**
+**Patterns**
 
 7. Find one example each of the Repository pattern, MVC and dependency injection. How do classes
    get their dependencies?
@@ -74,7 +74,7 @@ everything, and that's fine.
    class and method that runs, in order. What checks happen before the pet is saved? Where does
    the browser end up?
 
-**Write it down (last minute)**
+**Write it down (at the end)**
 
 In three sentences, explain how this codebase is organized to a new teammate. Keep it. You'll use it
 at the end.
@@ -82,7 +82,7 @@ at the end.
 Tip: tests tell you how the code is supposed to work. If you're stuck on question 9, read
 `PetControllerTests`.
 
-### Part 2: Ask your agent the same questions (7 min)
+### Part 2: Ask your agent the same questions
 
 Now open your AI coding assistant on the same repo. Ask it questions. Mix two kinds:
 
@@ -115,7 +115,7 @@ For every claim you didn't already know, check it. Open the file. Run the URL. T
 
 No agent? Pair with someone who has one, and be the one who checks.
 
-### Part 3: Debrief (6 min)
+### Part 3: Debrief
 
 Your facilitator will walk through the real answers. Then talk about:
 

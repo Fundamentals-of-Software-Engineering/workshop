@@ -23,16 +23,16 @@ now."
 
 Thoughtworks now calls its outer ring **Caution**. For a personal radar, Hold still fits.
 
-## The lab (10 minutes)
+## The lab
 
-### Part 1: Look at a real radar (2 min)
+### Part 1: Look at a real radar
 
 Open the Thoughtworks Technology Radar at https://www.thoughtworks.com/radar.
 
 - Pick a quadrant you care about. What's in Adopt? What's in the outer ring?
 - Find something that moved since the last edition. Why did it move?
 
-### Part 2: Build your own (6 min)
+### Part 2: Build your own
 
 There are no wrong answers. This is your radar.
 
@@ -48,7 +48,7 @@ open this link:
 
 Don't try to draw your own radar now. Paper is faster. Drawing it is a take-home step, below.
 
-### Part 3: Share (2 min)
+### Part 3: Share
 
 Show a neighbor one item in Hold and say why. Ask what they put in Adopt.
 

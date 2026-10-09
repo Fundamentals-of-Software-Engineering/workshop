@@ -20,8 +20,8 @@ write down how you want your agent to act when you're learning.
 tests. "Controllers never call repositories." "The domain depends on nothing." If someone (or some
 agent) breaks the rule, the build fails.
 
-Most Java developers have heard of it. Few have written a rule. That makes it a good fit for 12
-minutes.
+Most Java developers have heard of it. Few have written a rule. That makes it a good fit for a
+short lab.
 
 ## Setup (before the lab starts)
 
@@ -94,23 +94,23 @@ Fix any code that breaks a rule. Run ./mvnw test until it passes.
 
 Don't ask it to teach you. That's the other group's job.
 
-## The lab (20 minutes)
+## The lab
 
-### Part 1: Build it (12 min)
+### Part 1: Build it
 
 Do the task in `starter/README.md`, in your mode. Three rules, then fix the code that breaks one.
 
 Tutor mode and finished early? Try the stretch goal. Author mode is done when the tests pass. Move
 on, like you would at work.
 
-### Part 2: Quiz (4 min)
+### Part 2: Quiz
 
 Close the agent. Close the code. Open `quiz.md`, or look at the screen if your facilitator shows
 it. Answer the five questions on paper.
 
 No AI, no docs, no peeking at your project. Just you. That's the point.
 
-### Part 3: Score and debrief (4 min)
+### Part 3: Score and debrief
 
 Your facilitator will read the answers. Score your own paper. One point per question. For questions
 3 and 4, give yourself the point if you got the main idea. The most you can get is 5.

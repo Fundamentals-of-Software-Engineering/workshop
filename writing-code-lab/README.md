@@ -6,9 +6,9 @@ A Pet Weight Tracker with intentionally smelly code. Your job: find the smells a
 
 No build or IDE required. Open the files in `src/` in any text editor.
 
-## Exercise (15 minutes)
+## Exercise
 
-### Part 1: Identify Code Smells (5 min)
+### Part 1: Identify Code Smells
 
 Read through the files in `src/` and identify as many code smells as you can. Consider:
 
@@ -21,11 +21,11 @@ Read through the files in `src/` and identify as many code smells as you can. Co
 
 Write down at least 3 smells you find.
 
-### Part 2: Refactor (8 min)
+### Part 2: Refactor
 
 Pick 2-3 of the smells you found and refactor the code. Focus on the changes that would have the biggest impact on readability and maintainability.
 
-### Part 3: Discuss (2 min)
+### Part 3: Discuss
 
 Share what you found with your neighbor. Did you catch the same things? Different things?
 
