@@ -25,6 +25,10 @@ checked against that commit on Oct 8, 2026. URLs were checked against the runnin
 
 ## Part 1 answers
 
+The lab now asks five open questions, with mental notes and nothing written down. They map to the
+answers below: lab 1 is answers 1 and 2, lab 2 is answer 3, lab 3 is answer 4, lab 4 is answers 5
+and 6, and lab 5 is answer 9. Answers 7 and 8 are extra, if someone asks.
+
 ### Orientation
 
 **1. Technologies.**
@@ -179,13 +183,13 @@ agent that played along.
 - **Docs drift.** The README is wrong about `/h2-console`. `ClinicServiceTests` is named for a layer
   that left in 2016. An agent that reads stale docs repeats them with confidence. The book: "Do not
   assume the code does what the name implies."
-- **Read the tests.** `PetControllerTests` answers question 9 faster than the controller does. Code
+- **Read the tests.** `PetControllerTests` answers the Add Pet question faster than the controller does. Code
   tells you how. Tests tell you how it's supposed to work.
 - **Ask what the agent can't know.** Why there is no service layer is in the git history, not the
   code. Bonus for anyone who ran
   `git log --diff-filter=D --oneline -- '*PetRepository.java'`. The top line is `c953442 Remove
   PetRepository and use Owner as aggregate`.
-- The lines for their AGENTS.md come from their three sentences. A filled-in PetClinic version is
+- The lines for their AGENTS.md come from what they learned here, in the capstone. A filled-in PetClinic version is
   in the capstone's example.
 
 ## Live demo (Dan, the agent as tour guide)
