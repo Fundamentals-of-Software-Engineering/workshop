@@ -100,10 +100,10 @@ a weight shows nothing, -1 shows "Weight must be between 0.01 and 999.99 kg", an
 
 ## Running the lab
 
-- **Timing.** The one-liner finishes in 2 minutes and may start building. That's realistic. Let
+- **Timing.** The one-liner finishes fast and may start building. That's realistic. Let
   them. If their agent builds, have them run `./mvnw test -Dtest='Pet*Tests'`. The existing tests
   pass on a broken build. Good debrief material.
-- **The spec writer will feel slow.** That's the trade. Ask in the debrief whether 7 minutes of
+- **The spec writer will feel slow.** That's the trade. Ask in the debrief whether the extra
   thinking was worth it.
 - **No agent?** One laptop per pair. Run the one-liner first, then the spec, in fresh sessions.
 - **Plan mode.** Claude Code has it built in. For other tools, the prompt says "Don't write code
