@@ -16,14 +16,14 @@ pinned to commit `500158f732419217507c7656904b8e6aa1bcc0d6` (September 29, 2026)
 you'll know it well. Each lab follows the same shape: do it yourself first, then with your agent,
 then compare.
 
-| # | Lab | Time | What you do |
-|---|---|---|---|
-| 1 | [Read before you prompt](read-before-you-prompt-lab/) | 25 min | Read PetClinic with no AI, then ask your agent the same questions and check its answers. |
-| 2 | [Defuse the grenade](defuse-the-grenade-lab/) | 25 min | Review a pull request an agent wrote. Find the problems before they ship. |
-| 3 | [Spec it before you prompt](spec-it-before-you-prompt-lab/) | 20 min | Plan the same feature twice, from a one-line prompt and from a short spec. Compare. |
-| 4 | [Net before refactor](net-before-refactor-lab/) | 20 min | Pin down what old code does with tests, then let an agent refactor it. |
-| 5 | [Learn it, don't ship it](learn-it-dont-ship-it-lab/) | 20 min | Learn a new library in tutor mode or author mode, then take a quiz with no AI. |
-| 6 | [Capstone: your AGENTS.md](capstone-agents-md/) | 20 min | Turn the lines you collected in each lab into your own AGENTS.md. |
+| # | Lab | What you do |
+|---|---|---|
+| 1 | [Read before you prompt](read-before-you-prompt-lab/) | Read PetClinic with no AI, then ask your agent the same questions and check its answers. |
+| 2 | [Defuse the grenade](defuse-the-grenade-lab/) | Review a pull request an agent wrote. Find the problems before they ship. |
+| 3 | [Spec it before you prompt](spec-it-before-you-prompt-lab/) | Plan the same feature twice, from a one-line prompt and from a short spec. Compare. |
+| 4 | [Net before refactor](net-before-refactor-lab/) | Pin down what old code does with tests, then let an agent refactor it. |
+| 5 | [Learn it, don't ship it](learn-it-dont-ship-it-lab/) | Learn a new library in tutor mode or author mode, then take a quiz with no AI. |
+| 6 | [Capstone: your AGENTS.md](capstone-agents-md/) | Turn the lines you collected in each lab into your own AGENTS.md. |
 
 Each lab ends with an "Add to your AGENTS.md" section. Keep those lines. The capstone uses them.
 
@@ -31,16 +31,16 @@ Each lab ends with an "Add to your AGENTS.md" section. Keep those lines. The cap
 
 Use these if there's time, or take them home.
 
-| Lab | Time | What you do |
-|---|---|---|
-| [Research a role with NotebookLM](tools/notebooklm-career-lab/) | 15 min | Research a role you want with Gemini Notebook (formerly NotebookLM), then check its sources. |
-| [Your personal tech radar](tools/tech-radar-lab/) | 10 min | Put the tools you know and want to learn into Adopt, Trial, Assess and Hold. |
+| Lab | What you do |
+|---|---|
+| [Research a role with NotebookLM](tools/notebooklm-career-lab/) | Research a role you want with Gemini Notebook (formerly NotebookLM), then check its sources. |
+| [Your personal tech radar](tools/tech-radar-lab/) | Put the tools you know and want to learn into Adopt, Trial, Assess and Hold. |
 
 ### From earlier workshops
 
-| Lab | Time | What you do |
-|---|---|---|
-| [Writing clean code](writing-code-lab/) | 15 min | Find and fix the code smells in a small pet weight tracker. |
+| Lab | What you do |
+|---|---|
+| [Writing clean code](writing-code-lab/) | Find and fix the code smells in a small pet weight tracker. |
 
 ## Prerequisites
 

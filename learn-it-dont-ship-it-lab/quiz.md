@@ -1,6 +1,6 @@
 # Quiz: Learn It, Don't Ship It
 
-Five questions. Four minutes.
+Five questions.
 
 No AI. No docs. No looking at your project. Write your answers on paper.
 

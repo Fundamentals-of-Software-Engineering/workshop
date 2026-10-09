@@ -11,7 +11,7 @@ didn't change what the clinic charges?
 
 Your job: build a safety net first. Then let the agent refactor, and see what your net catches.
 
-## Setup (2 minutes, before the clock starts)
+## Setup (before the lab starts)
 
 You need Git and Java 17 or newer. You don't need Docker.
 
@@ -60,11 +60,11 @@ The hard part is step 1. You'll find things that look like bugs. Don't fix them.
 pins them down, give it a name that says what's odd, and ask someone later. Somebody might depend on
 that bug.
 
-## The lab (20 minutes)
+## The lab
 
 Work in pairs or teams of three.
 
-### Part 1: Read and characterize (9 min)
+### Part 1: Read and characterize
 
 Read `VisitFeeCalculator` first. Then write tests in
 `src/test/java/org/springframework/samples/petclinic/owner/VisitFeeCalculatorTests.java`.
@@ -160,7 +160,7 @@ git commit -m "Characterization tests for VisitFeeCalculator"
 
 Now you can see if anyone touches them.
 
-### Part 2: Let your agent refactor it (4 min)
+### Part 2: Let your agent refactor it
 
 No agent on either laptop? Skip to Part 3.
 
@@ -182,7 +182,7 @@ For each red test, decide: did the refactor change behavior, or is the test wron
 
 All green? Good. How would you know that without your tests? Then do Part 3 too.
 
-### Part 3: No agent? Use ours (2 min)
+### Part 3: No agent? Use ours
 
 No AI tool, or want a second opinion? We saved a refactor an agent might write. It reads much
 nicer. Its summary said:
@@ -220,7 +220,7 @@ git stash pop                                # the refactor again
 
 Want your agent's version back after the lab? Run `git restore src/main`, then `git stash pop`.
 
-### Part 4: Debrief (5 min)
+### Part 4: Debrief
 
 Your facilitator will walk through what changed. Talk about:
 

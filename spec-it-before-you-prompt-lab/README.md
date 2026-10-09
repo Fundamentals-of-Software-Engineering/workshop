@@ -11,7 +11,7 @@ agent planned.
 English is a great way to describe what you want. It's also vague. A spec says what you mean. A test
 proves the code does it.
 
-## Setup (5 minutes, or before the workshop)
+## Setup (before the lab, or before the workshop)
 
 You need Git, Java 17 or newer, and an AI coding assistant. Plan mode (or "don't write code yet")
 is fine. You don't need to generate code to do this lab.
@@ -35,7 +35,7 @@ Run `git add -A` first. A plain `git stash -u` fails after the Defuse lab.
 
 Each person starts a fresh agent session, so neither agent has seen the other's prompt.
 
-## The lab (20 minutes)
+## The lab
 
 Work in pairs. Decide who is **One-liner** and who is **Spec writer**. Both of you plan the same
 feature. Only the prompt is different.
@@ -44,7 +44,7 @@ No agent? Pair with someone who has one and share it. Run the one-liner first. T
 session for the spec. Keep the spec file out of the PetClinic folder, so the first agent can't
 read it.
 
-### Part 1: Two prompts (10 min)
+### Part 1: Two prompts
 
 **One-liner.** Start now. Give your agent exactly this, in plan mode:
 
@@ -60,7 +60,7 @@ Answer any questions it asks, as best you can. Read its plan. Write down:
 
 Then, if you like, let it build. If it builds, run the tests: `./mvnw test -Dtest='Pet*Tests'`.
 
-**Spec writer.** Don't prompt yet. Spend 7 minutes filling in `spec-template.md`. Keep it short.
+**Spec writer.** Don't prompt yet. Fill in `spec-template.md`. Keep it short.
 Bullet points are fine. Look at the code when you need to. The two most important sections:
 
 - **Edge cases.** What about the pets that already exist? What's a valid weight? What happens when
@@ -78,7 +78,7 @@ Then give your agent the spec, in plan mode:
 >
 > (paste your spec)
 
-### Part 2: Compare (5 min)
+### Part 2: Compare
 
 Put the two plans side by side. If an agent built code, look at the diff too. Score both with
 `rubric.md`. Go fast. A quick score is fine. Then answer:
@@ -88,7 +88,7 @@ Put the two plans side by side. If an agent built code, look at the diff too. Sc
 - Which plan would you rather review as a pull request?
 - How long did each one take, end to end?
 
-### Part 3: Debrief (5 min)
+### Part 3: Debrief
 
 Your facilitator will show an example spec and the tests that go with it. Talk about:
 

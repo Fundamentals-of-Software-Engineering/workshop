@@ -8,7 +8,7 @@ Your job: review it before it merges. Some of what you'll find is the kind of th
 
 There are more than ten problems in this PR. How many can your team find?
 
-## Setup (2 minutes, before the clock starts)
+## Setup (before the lab starts)
 
 You need Git and Java 17 or newer. You don't need Docker.
 
@@ -48,11 +48,11 @@ Optional: check the claims you can.
   That runs the other 80 tests.
 - Run the app: `./mvnw spring-boot:run`, then open http://localhost:8080/api/owners/search?petName=Leo
 
-## The lab (25 minutes)
+## The lab
 
 Work in teams of two or three. Everyone reads on their own screen. Keep one shared list for the team.
 
-### Part 1: Review it yourself (12 min)
+### Part 1: Review it yourself
 
 No AI for this part. That's the point.
 
@@ -66,7 +66,7 @@ No AI for this part. That's the point.
 
 Use the review checklist below if you get stuck.
 
-### Part 2: Ask your agent to review it (5 min)
+### Part 2: Ask your agent to review it
 
 Now give the same PR to your AI coding agent. No agent? Use a teammate's, or join a team that has one.
 
@@ -85,7 +85,7 @@ Compare its list with yours:
 - What did it miss that you caught?
 - Did it believe the PR description?
 
-### Part 3: Score and debrief (8 min)
+### Part 3: Score and debrief
 
 Your facilitator will walk through the answers. Score your Part 1 list first:
 

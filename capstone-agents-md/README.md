@@ -9,12 +9,12 @@ coding agents look for it at the root of the repo.
 The fundamentals didn't change. Now you write them down for a reader that never gets tired and
 never remembers yesterday.
 
-## The lab (20 minutes)
+## The lab
 
 Work alone. Use PetClinic, or a codebase you work on. Your own code is better if you can share it
 with your agent.
 
-### Part 1: Collect (3 min)
+### Part 1: Collect
 
 Open your notes from each lab. Find the "Add to your AGENTS.md" lines.
 
@@ -31,7 +31,7 @@ with" and "Test it with" lines go under Commands.
 
 Missed a lab? Borrow lines from the example below, then make them yours.
 
-### Part 2: Write it (10 min)
+### Part 2: Write it
 
 Copy `AGENTS-template.md`. Fill it in. Then cut.
 
@@ -44,7 +44,7 @@ Copy `AGENTS-template.md`. Fill it in. Then cut.
 - **Name what not to trust.** Stale docs, misleading names, the thing that bit you today.
 - **Keep it short.** Aim for one screen. A rule the agent skims past is no rule at all.
 
-### Part 3: Test it on your agent (5 min)
+### Part 3: Test it on your agent
 
 Save the file as `AGENTS.md` at the root of the repo. Then start a new agent session, so it loads
 the file.
@@ -69,7 +69,7 @@ In PetClinic, try this:
 
 Did it list its assumptions? Did it find all three `schema.sql` files? Did it name the tests first?
 
-### Part 4: Share one rule (2 min)
+### Part 4: Share one rule
 
 Read your best line to your neighbor. Steal one of theirs.
 
