@@ -88,11 +88,3 @@ Git will say you're in "detached HEAD" state after the checkout. That's expected
 
 Both builds should end with `BUILD SUCCESS`. The second one says `Tests run: 0`. That's expected
 too. If a build says your Java is too old, install Java 17 or newer and set `JAVA_HOME` to it.
-
-## Answers
-
-Answer keys and solutions live on the `solution` branch. Try each lab first.
-
-```bash
-git checkout solution
-```

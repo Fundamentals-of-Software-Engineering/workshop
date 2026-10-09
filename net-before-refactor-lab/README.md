@@ -245,8 +245,3 @@ Write three to five lines your agent should follow next time. For example:
 - A refactor never changes tests. If a test goes red, stop and ask.
 - Run the tests before and after every refactor, and show me the results.
 ```
-
-## Answers
-
-The answer key is `ANSWERS.md` in this lab's folder on the repo's `solution` branch. Look at it only
-after Part 4.

@@ -141,8 +141,3 @@ Write three to five lines for how your agent should help when you're learning. F
 - Give me the smallest hint first.
 - If I ask you to just write it, ask if I've written one myself before.
 ```
-
-## Answers
-
-Your facilitator has the answer key. It's on the repo's `solution` branch. Look at it only after
-Part 3.
