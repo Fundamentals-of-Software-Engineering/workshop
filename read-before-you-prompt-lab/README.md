@@ -49,14 +49,14 @@ room asks the same thing:
 >    few sentences.
 > 2. How is data persistence handled? Where is the database configured, and how does the schema
 >    get created?
-> 3. Pick the Pet entity and find its model, repository, service, and controller.
+> 3. Pick the Pet entity and find its model, repository, service, and controller. \*
 > 4. Trace what happens, step by step, when someone submits the form at
 >    /owners/{ownerId}/pets/new. Name every class and method involved.
-> 5. How can I look at the data in the database while the app is running locally?
+> 5. How can I look at the data in the database while the app is running locally? \*
 > 6. Show me the Owner entity.
 
-Some of these questions have a wrong idea baked in. That's on purpose. Notice whether the agent
-pushes back or plays along.
+\* These two have a trap built in. One assumes something that isn't there. The other leads to advice
+that's out of date. Notice whether the agent pushes back or plays along.
 
 As you go, notice:
 
