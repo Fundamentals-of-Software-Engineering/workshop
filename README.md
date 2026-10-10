@@ -11,10 +11,11 @@ an AI coding agent.
 
 "Fundamentals of Software Engineering in the Age of AI." Monday, October 12, 2026.
 
-Most labs use one codebase all day: [Spring PetClinic](https://github.com/spring-projects/spring-petclinic),
-pinned to commit `500158f732419217507c7656904b8e6aa1bcc0d6` (September 29, 2026). By the afternoon
-you'll know it well. Each lab follows the same shape: do it yourself first, then with your agent,
-then compare.
+Most labs use one codebase all day: [Spring PetClinic](https://github.com/spring-projects/spring-petclinic).
+You clone [our copy](https://github.com/Fundamentals-of-Software-Engineering/spring-petclinic) once.
+Its `main` is PetClinic as of September 29, 2026. Labs that need more code have their own branch.
+By the afternoon you'll know PetClinic well. Each lab follows the same shape: do it yourself first,
+then with your agent, then compare.
 
 | # | Lab | What you do |
 |---|---|---|
@@ -55,36 +56,54 @@ Use these if there's time, or take them home.
 
 ## Before the workshop
 
-Clone PetClinic and this repo. Build PetClinic and the Learn it lab's starter once, so the
-dependencies download before you arrive. Conference Wi-Fi is slow.
+Clone our copy of PetClinic. It's the only thing you need to clone. Every lab is a branch in it.
+
+Build it once, and build the Learn it lab's project too, so the dependencies download before you
+arrive. Conference Wi-Fi is slow.
 
 macOS and Linux:
 
 ```bash
-git clone https://github.com/spring-projects/spring-petclinic.git
+git clone https://github.com/Fundamentals-of-Software-Engineering/spring-petclinic.git
 cd spring-petclinic
-git checkout 500158f732419217507c7656904b8e6aa1bcc0d6
 ./mvnw -DskipTests package
-cd ..
-git clone https://github.com/Fundamentals-of-Software-Engineering/workshop.git
-cd workshop/learn-it-dont-ship-it-lab/starter
+git switch learn-it-dont-ship-it
+cd clinic-rules
 ./mvnw test
+cd ..
+git switch main
 ```
 
 Windows (PowerShell or Command Prompt):
 
 ```bat
-git clone https://github.com/spring-projects/spring-petclinic.git
+git clone https://github.com/Fundamentals-of-Software-Engineering/spring-petclinic.git
 cd spring-petclinic
-git checkout 500158f732419217507c7656904b8e6aa1bcc0d6
 .\mvnw.cmd -DskipTests package
-cd ..
-git clone https://github.com/Fundamentals-of-Software-Engineering/workshop.git
-cd workshop\learn-it-dont-ship-it-lab\starter
+git switch learn-it-dont-ship-it
+cd clinic-rules
 .\mvnw.cmd test
+cd ..
+git switch main
 ```
 
-Git will say you're in "detached HEAD" state after the checkout. That's expected.
+Both builds should end with `BUILD SUCCESS`. The second one says `Tests run: 0`. That's expected.
+If a build says your Java is too old, install Java 17 or newer and set `JAVA_HOME` to it.
 
-Both builds should end with `BUILD SUCCESS`. The second one says `Tests run: 0`. That's expected
-too. If a build says your Java is too old, install Java 17 or newer and set `JAVA_HOME` to it.
+## Branches
+
+Each lab tells you which branch to use.
+
+| Lab | Branch |
+|---|---|
+| Read before you prompt | `main` |
+| Defuse the grenade | `defuse-the-grenade` |
+| Spec it before you prompt | `main` |
+| Net before refactor | `net-before-refactor` |
+| Learn it, don't ship it | `learn-it-dont-ship-it` |
+| Capstone | `main` |
+
+Before you switch, run `git status`. If it shows changes from an earlier lab, run `git stash -u`
+first. That puts your work aside, and you can get it back later with `git stash pop`.
+
+On Windows, type `.\mvnw.cmd` wherever a lab says `./mvnw`.

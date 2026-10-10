@@ -33,7 +33,7 @@ Missed a lab? Borrow lines from the example below, then make them yours.
 
 ### Part 2: Write it
 
-Copy `AGENTS-template.md`. Fill it in. Then cut.
+Copy [`AGENTS-template.md`](AGENTS-template.md) from this folder. Fill it in. Then cut.
 
 - **Be specific.** "Write clean code" changes nothing. "Validate pet forms in `PetValidator`"
   does.

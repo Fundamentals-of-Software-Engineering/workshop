@@ -8,8 +8,8 @@ You can only judge what the agent tells you if you know the code.
 
 ## Setup
 
-You need the PetClinic clone from [Before the workshop](../README.md#before-the-workshop), at commit
-`500158f`. An IDE helps a lot.
+You need the PetClinic clone from [Before the workshop](../README.md#before-the-workshop), on the
+`main` branch. An IDE helps a lot.
 
 Run the app if you can. You'll want it in Part 2, to check what your agent tells you.
 
