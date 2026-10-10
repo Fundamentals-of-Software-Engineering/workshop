@@ -56,39 +56,17 @@ Use these if there's time, or take them home.
 
 ## Before the workshop
 
-Clone our copy of PetClinic. It's the only thing you need to clone. Every lab is a branch in it.
-
-Build it once, and build the Learn it lab's project too, so the dependencies download before you
-arrive. Conference Wi-Fi is slow.
-
-macOS and Linux:
+Clone our copy of PetClinic. It's the only thing you need. Every lab is a branch in it. Then build it
+once, so the downloads happen at home. Conference Wi-Fi is slow.
 
 ```bash
 git clone https://github.com/Fundamentals-of-Software-Engineering/spring-petclinic.git
 cd spring-petclinic
 ./mvnw -DskipTests package
-git switch learn-it-dont-ship-it
-cd clinic-rules
-./mvnw test
-cd ..
-git switch main
 ```
 
-Windows (PowerShell or Command Prompt):
-
-```bat
-git clone https://github.com/Fundamentals-of-Software-Engineering/spring-petclinic.git
-cd spring-petclinic
-.\mvnw.cmd -DskipTests package
-git switch learn-it-dont-ship-it
-cd clinic-rules
-.\mvnw.cmd test
-cd ..
-git switch main
-```
-
-Both builds should end with `BUILD SUCCESS`. The second one says `Tests run: 0`. That's expected.
-If a build says your Java is too old, install Java 17 or newer and set `JAVA_HOME` to it.
+You're ready when it ends with `BUILD SUCCESS`. On Windows, use `.\mvnw.cmd` in the last line. If it
+says your Java is too old, install Java 17 or newer and set `JAVA_HOME` to it.
 
 ## Branches
 

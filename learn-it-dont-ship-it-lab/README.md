@@ -28,8 +28,7 @@ short lab.
 You need Java 17 or newer and your usual AI coding assistant. Maven comes with the project.
 
 The project is in the `clinic-rules` folder on the `learn-it-dont-ship-it` branch of your PetClinic
-clone. If you did [Before the workshop](../README.md#before-the-workshop), it's already built.
-Otherwise the first run downloads Maven and ArchUnit, so you need Wi-Fi.
+clone. The first run downloads ArchUnit. It's small.
 
 ```bash
 git status
