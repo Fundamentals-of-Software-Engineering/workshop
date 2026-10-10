@@ -75,4 +75,3 @@ Your facilitator will walk through the real answers. Then talk about:
 - Did your agent invent anything? A class, a layer, a URL? Would you have caught it without Part 1?
 - Did it go along with a wrong idea in a question? What does that mean for how you write prompts?
 - Where did the agent beat you?
-- Did anything in the project's own README turn out to be wrong?
