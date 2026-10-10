@@ -4,7 +4,7 @@ Five questions.
 
 No AI. No docs. No looking at your project. Write your answers on paper.
 
-All questions use the clinic app from the starter. It has four packages under `com.example.clinic`:
+All questions use the clinic app from the lab. It has four packages under `com.example.clinic`:
 `domain`, `repository`, `service` and `web`.
 
 ---

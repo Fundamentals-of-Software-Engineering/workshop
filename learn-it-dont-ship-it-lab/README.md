@@ -27,18 +27,24 @@ short lab.
 
 You need Java 17 or newer and your usual AI coding assistant. Maven comes with the project.
 
-Run this before the workshop, or at least before the lab starts. The first run downloads Maven and
-ArchUnit, so you need wifi. After that, it works offline.
+The project is in the `clinic-rules` folder on the `learn-it-dont-ship-it` branch of your PetClinic
+clone. If you did [Before the workshop](../README.md#before-the-workshop), it's already built.
+Otherwise the first run downloads Maven and ArchUnit, so you need Wi-Fi.
 
 ```bash
-cd /path/to/workshop/learn-it-dont-ship-it-lab/starter
-./mvnw test          # Windows: .\mvnw.cmd test
+git status
+git switch learn-it-dont-ship-it
+cd clinic-rules
+./mvnw test
 ```
+
+If `git status` showed changes from an earlier lab, run `git stash -u` before you switch.
 
 You should see `Tests run: 0` and `BUILD SUCCESS`. That's expected. There are no rules yet. You'll
 write them.
 
-Open your agent in the `starter` folder. The task is in `starter/README.md`.
+Open your agent in the `clinic-rules` folder, not the PetClinic folder. The task is in
+`clinic-rules/README.md`.
 
 ## The two modes
 
@@ -98,7 +104,7 @@ Don't ask it to teach you. That's the other group's job.
 
 ### Part 1: Build it
 
-Do the task in `starter/README.md`, in your mode. Three rules, then fix the code that breaks one.
+Do the task in `clinic-rules/README.md`, in your mode. Three rules, then fix the code that breaks one.
 
 Tutor mode and finished early? Try the stretch goal. Author mode is done when the tests pass. Move
 on, like you would at work.

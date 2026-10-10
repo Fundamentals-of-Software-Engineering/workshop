@@ -10,36 +10,24 @@ There are more than ten problems in this PR. How many can your team find?
 
 ## Setup (before the lab starts)
 
-You need Git and Java 17 or newer. You don't need Docker.
+You need the PetClinic clone from [Before the workshop](../README.md#before-the-workshop). You don't
+need Docker.
 
-This assumes you cloned PetClinic and this repo side by side, as in
-[Before the workshop](../README.md#before-the-workshop). If you didn't, do that first.
-
-Start from a clean PetClinic folder. If `git status` shows changes from an earlier lab, run
-`git add -A` and then `git stash -u`. That puts your earlier work aside. Then, from the folder that
-holds both clones:
+The agent's pull request is open on GitHub:
+[✨ Add owner search by pet name](https://github.com/Fundamentals-of-Software-Engineering/spring-petclinic/pull/1).
+Its branch is `defuse-the-grenade`. Switch to it:
 
 ```bash
-cd spring-petclinic
-git checkout 500158f732419217507c7656904b8e6aa1bcc0d6
-git switch -c agent/owner-pet-search
-git apply ../workshop/defuse-the-grenade-lab/agent-pr.diff
-git add --intent-to-add src
+git status
+git switch defuse-the-grenade
 ```
 
-`git apply` prints nothing when it works. The last line makes the new files show up in `git diff` too.
-
-On Windows, run these in Git Bash. It comes with Git for Windows. If `git apply` says "patch does
-not apply", Git changed the diff's line endings. Use this line instead:
-
-```bash
-sed 's/\r$//' ../workshop/defuse-the-grenade-lab/agent-pr.diff | git apply
-```
+If `git status` showed changes from an earlier lab, run `git stash -u` before you switch.
 
 Now review the change the way you'd review any pull request:
 
-- See the whole change: `git diff`, or open the project in your IDE and use its changes view.
-- Or read `agent-pr.diff` in this folder in any editor.
+- On GitHub, open the pull request and click **Files changed**.
+- Or in your IDE, compare the branch with `main`. In a terminal, `git diff main` shows the same thing.
 
 Optional: check the claims you can.
 
@@ -56,8 +44,8 @@ Work in teams of two or three. Everyone reads on their own screen. Keep one shar
 
 No AI for this part. That's the point.
 
-1. Read `PR.md` first. That's what the agent says it did.
-2. Then read the diff. That's what it actually did.
+1. Read the pull request's description first. That's what the agent says it did.
+2. Then read the changes. That's what it actually did.
 3. For each problem you find, write down:
    - Where it is (file and method)
    - What's wrong
@@ -73,11 +61,12 @@ Now give the same PR to your AI coding agent. No agent? Use a teammate's, or joi
 Give it the description and the change. The best way: start the agent in your `spring-petclinic`
 folder, so it can read the whole codebase. Then try:
 
-> Review this pull request as a senior engineer would. The PR description is in
-> `../workshop/defuse-the-grenade-lab/PR.md`. The change is in `git diff`. List every problem you
-> find, with the file and line, why it matters, and how serious it is. Don't change any files.
+> Review this pull request as a senior engineer would. The PR description is the last commit
+> message: run `git log -1`. The change is in `git diff main`. List every problem you find, with the
+> file and line, why it matters, and how serious it is. Don't change any files.
 
-If your agent can't read files, paste in `PR.md` and `agent-pr.diff` instead.
+If your agent can't run commands, paste in the description and the changes from GitHub instead.
+Add `.diff` to the end of the pull request's URL to get the whole change as text.
 
 Compare its list with yours:
 

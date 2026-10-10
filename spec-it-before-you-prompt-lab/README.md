@@ -16,22 +16,15 @@ proves the code does it.
 You need Git, Java 17 or newer, and an AI coding assistant. Plan mode (or "don't write code yet")
 is fine. You don't need to generate code to do this lab.
 
-```bash
-git clone https://github.com/spring-projects/spring-petclinic.git
-cd spring-petclinic
-git checkout 500158f732419217507c7656904b8e6aa1bcc0d6
-```
-
-Already have the clone from an earlier lab? Defuse the grenade left it on another branch with
-changes. Set them aside and go back to the pinned commit:
+Use the PetClinic clone from [Before the workshop](../README.md#before-the-workshop), on the
+`main` branch:
 
 ```bash
-git add -A
-git stash -u
-git checkout 500158f732419217507c7656904b8e6aa1bcc0d6
+git status
+git switch main
 ```
 
-Run `git add -A` first. A plain `git stash -u` fails after the Defuse lab.
+If `git status` showed changes from an earlier lab, run `git stash -u` before you switch.
 
 Each person starts a fresh agent session, so neither agent has seen the other's prompt.
 
@@ -102,21 +95,26 @@ Your facilitator will show an example spec and the tests that go with it. Talk a
 ## Stretch: write the failing test before the prompt
 
 After the debrief, open `example-spec.md`. It ends with a test class, `PetWeightTests`. It compiles
-against the pinned PetClinic and fails until the feature works.
+against PetClinic and fails until the feature works.
 
-Start from a clean PetClinic. If an agent already changed the code, run `git stash -u` first.
+We put the spec and its tests on a branch for you. Set aside any changes an agent made, then switch:
 
-1. Copy the Java code at the end of `example-spec.md`. Save it as
+```bash
+git stash -u
+git switch spec-it-stretch
+```
+
+`git stash -u` says "No local changes to save" if there's nothing to set aside. That's fine.
+
+1. `example-spec.md` is in the PetClinic folder now, so your agent can read it. The tests are in
    `src/test/java/org/springframework/samples/petclinic/owner/PetWeightTests.java`.
-2. Copy `example-spec.md` into the PetClinic folder too, so your agent can read it.
-3. Run `./mvnw spring-javaformat:apply`. The build checks formatting, so pasted code can fail it.
-4. Run `./mvnw test -Dtest=PetWeightTests`. Ten of the 11 tests fail. That's the red step.
-5. Give your agent the green step:
+2. Run `./mvnw test -Dtest=PetWeightTests`. Ten of the 11 tests fail. That's the red step.
+3. Give your agent the green step:
 
    > Make PetWeightTests pass. Follow example-spec.md. Don't change the tests. Then run the full
    > test suite and tell me what you checked and what you didn't.
 
-6. Review the diff. Do the tests pass for the right reasons?
+4. Review the diff. Do the tests pass for the right reasons?
 
 The full test suite needs Docker for the MySQL and Postgres tests. Without Docker, run
 `./mvnw test -Dtest='!MySqlIntegrationTests,!PostgresIntegrationTests'`.
@@ -136,6 +134,8 @@ plan missed. For example:
 ```
 
 ## Files
+
+These are in this lab's folder on GitHub, not in your PetClinic clone. Open them in your browser.
 
 | File | What it's for |
 |---|---|
