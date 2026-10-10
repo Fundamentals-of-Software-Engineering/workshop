@@ -24,10 +24,14 @@ git switch defuse-the-grenade
 
 If `git status` showed changes from an earlier lab, run `git stash -u` before you switch.
 
-Now review the change the way you'd review any pull request:
+The agent already committed its change, so `git status` shows nothing. To see what it changed,
+compare the branch with `main`. Pick one:
 
-- On GitHub, open the pull request and click **Files changed**.
-- Or in your IDE, compare the branch with `main`. In a terminal, `git diff main` shows the same thing.
+- **On GitHub:** open [the pull request](https://github.com/Fundamentals-of-Software-Engineering/spring-petclinic/pull/1)
+  and click the **Files changed** tab.
+- **In IntelliJ:** click the branch name at the top of the window, then **main**, then
+  **Show Diff with Working Tree**.
+- **In a terminal:** `git diff main`.
 
 Optional: check the claims you can.
 
