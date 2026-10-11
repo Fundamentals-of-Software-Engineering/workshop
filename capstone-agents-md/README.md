@@ -1,6 +1,7 @@
 # Capstone: Your AGENTS.md
 
-All day you wrote down lines for your agent at the end of each lab. Now you put them in one file.
+All day you watched agents get things right and wrong. Now you write down what your agent should
+know, in one file.
 
 An `AGENTS.md` is your fundamentals, written down for your agent. It's the coding standards doc,
 the review checklist and the onboarding notes, in a form an agent reads before every task. Most
@@ -14,26 +15,29 @@ never remembers yesterday.
 Work alone. Use PetClinic, or a codebase you work on. Your own code is better if you can share it
 with your agent.
 
-### Part 1: Collect
+### Part 1: Start from the example
 
-Open your notes from each lab. Find the "Add to your AGENTS.md" lines.
+Don't start from a blank page.
 
-| Lab | Section it fills |
+- **Using PetClinic?** Copy the [example at the bottom](#example-agentsmd-for-petclinic). It has a
+  section for each lab.
+- **Using your own codebase?** Copy [`AGENTS-template.md`](AGENTS-template.md) from this folder.
+  Borrow lines from the example where they fit.
+
+### Part 2: Make it yours
+
+Go through it section by section. Keep the lines that match what you saw today. Cut the ones that
+don't. Add your own.
+
+| Lab | Section |
 |---|---|
-| Read before you prompt | About this codebase, and Commands. Write these now, from what you learned exploring PetClinic. |
+| Read before you prompt | About this codebase, and Commands |
 | Defuse the grenade | Review rules |
 | Spec it before you prompt | How to plan a change |
 | Net before refactor | Changing existing code |
 | Learn it, don't ship it | When I'm learning |
 
-For the Read lab, think about how the code is organized, how to run and test it, and what your
-agent or the docs got wrong.
-
-Missed a lab? Borrow lines from the example below, then make them yours.
-
-### Part 2: Write it
-
-Copy [`AGENTS-template.md`](AGENTS-template.md) from this folder. Fill it in. Then cut.
+As you go:
 
 - **Be specific.** "Write clean code" changes nothing. "Validate pet forms in `PetValidator`"
   does.
