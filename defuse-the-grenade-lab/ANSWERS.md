@@ -1,6 +1,6 @@
 # Defuse the Grenade: answers
 
-13 planted problems. One point each, plus one for naming the fundamental.
+13 planted problems. The four hints in the README point at #1, #3, #8 and #5.
 
 | # | Where | Problem | Fundamental |
 |---|---|---|---|
