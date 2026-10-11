@@ -119,20 +119,6 @@ git switch spec-it-stretch
 The full test suite needs Docker for the MySQL and Postgres tests. Without Docker, run
 `./mvnw test -Dtest='!MySqlIntegrationTests,!PostgresIntegrationTests'`.
 
-## Add to your AGENTS.md
-
-Write three to five lines about how your agent should plan a change. Start from what the one-line
-plan missed. For example:
-
-```markdown
-## How to plan a change
-- Before you write code, restate the goal and list your assumptions. Ask me about the ones that matter.
-- List the edge cases. Always include existing data, invalid input, and the edit path.
-- Write or update the failing tests first. Show me the test names before you build.
-- Follow the patterns already in the codebase. Name the file you copied the pattern from.
-- Say what is out of scope. Don't build it.
-```
-
 ## Files
 
 These are in this lab's folder on GitHub, not in your PetClinic clone. Open them in your browser.

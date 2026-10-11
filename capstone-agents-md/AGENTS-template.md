@@ -18,8 +18,7 @@ Delete any section you don't need. Delete these comments when you're done.
 
 ## Commands
 
-<!-- Exact commands. Agents guess these wrong all the time.
-Your "Run it with" and "Test it with" lines from Read before you prompt go here. -->
+<!-- Exact commands. Agents guess these wrong all the time. -->
 
 - Run:
 - Test one class:

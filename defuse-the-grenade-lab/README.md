@@ -112,28 +112,3 @@ Smells are your review checklist now. Go through each one.
 | Dependencies | Is each new dependency needed? Is the version current? |
 | Config | Does every new setting actually exist? |
 | Claims | Is every line in the PR description true? |
-
-## Add to your AGENTS.md
-
-Write three to five lines your agent should follow next time, based on what you found. Do it after
-Part 3. Keep them. The capstone uses them.
-
-```markdown
-## Review rules
-- Never ... Instead, ...
-- Don't ... without asking first.
-```
-
-<details>
-<summary>Example lines. They give away answers, so open this after Part 3.</summary>
-
-```markdown
-## Review rules
-- Never build SQL by joining strings. Use parameters.
-- Don't change existing tests to make them pass. Stop and ask.
-- No new dependencies without asking first.
-- Never log personal data like addresses or phone numbers.
-- Every test must assert something.
-```
-
-</details>

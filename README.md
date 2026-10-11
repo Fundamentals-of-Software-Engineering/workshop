@@ -24,9 +24,7 @@ then with your agent, then compare.
 | 3 | [Spec it before you prompt](spec-it-before-you-prompt-lab/) | Plan the same feature twice, from a one-line prompt and from a short spec. Compare. |
 | 4 | [Net before refactor](net-before-refactor-lab/) | Pin down what old code does with tests, then let an agent refactor it. |
 | 5 | [Learn it, don't ship it](learn-it-dont-ship-it-lab/) | Learn a new library in tutor mode or author mode, then take a quiz with no AI. |
-| 6 | [Capstone: your AGENTS.md](capstone-agents-md/) | Turn the lines you collected in each lab into your own AGENTS.md. |
-
-Each lab ends with an "Add to your AGENTS.md" section. Keep those lines. The capstone uses them.
+| 6 | [Capstone: your AGENTS.md](capstone-agents-md/) | Write your own AGENTS.md, from what you saw in the labs. |
 
 ### Optional extra content
 

@@ -11,8 +11,7 @@ This lab is a small, live version of that study. You'll learn a library you prob
 in one of two modes. Then you'll take a short quiz. No AI, no notes. We'll see how the two modes
 compare.
 
-**Goal:** feel the difference between learning with an agent and handing the work to one. Then
-write down how you want your agent to act when you're learning.
+**Goal:** feel the difference between learning with an agent and handing the work to one.
 
 ## The library: ArchUnit
 
@@ -133,16 +132,3 @@ Talk about:
 
 The rule of thumb: never written it? Write it once yourself. Written it a thousand times? Hand it
 off.
-
-## Add to your AGENTS.md
-
-Write three to five lines for how your agent should help when you're learning. For example:
-
-```markdown
-## When I'm learning
-- When I'm learning something new, explain and quiz me. Don't write the code.
-- Ask me to predict what a test will do before I run it.
-- When a test fails, ask me what I think the message means before you explain it.
-- Give me the smallest hint first.
-- If I ask you to just write it, ask if I've written one myself before.
-```
