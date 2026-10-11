@@ -6,7 +6,7 @@ It compiles. All 84 tests pass. The PR description says it's secure, fast and we
 Your job: review it before it merges. Some of what you'll find is the kind of thing people now call a
 "slop grenade": work that looks done, gets passed along unread, and blows up on someone else.
 
-There are more than ten problems in this PR. How many can your team find?
+There are 13 problems in this PR. You only need to find two. Your agent goes after the rest.
 
 ## Setup (before the lab starts)
 
@@ -42,21 +42,23 @@ Optional: check the claims you can.
 
 ## The lab
 
-Work in teams of two or three. Everyone reads on their own screen. Keep one shared list for the team.
+Work in teams of two or three.
 
-### Part 1: Review it yourself
+### Part 1: Find two problems yourself
 
 No AI for this part. That's the point.
 
-1. Read the pull request's description first. That's what the agent says it did.
-2. Then read the changes. That's what it actually did.
-3. For each problem you find, write down:
-   - Where it is (file and method)
-   - What's wrong
-   - What could happen in production
-   - The fundamental that would have caught it
+1. Read the pull request's description. That's what the agent says it did.
+2. Read the changes. That's what it actually did.
+3. Find two problems. Just two. For each one, be ready to say what's wrong and what could happen
+   in production.
 
-Use the review checklist below if you get stuck.
+Stuck? Start with one of these:
+
+- `PetNameOwnerSearchStrategy`: how does it build its SQL?
+- `OwnerSearchControllerTests`: what do the new tests actually check?
+- `OwnerSearchResult`: what does it send back about each owner?
+- `OwnerController`: why did a search feature change this file?
 
 ### Part 2: Ask your agent to review it
 
@@ -78,27 +80,18 @@ Compare its list with yours:
 - What did it miss that you caught?
 - Did it believe the PR description?
 
-### Part 3: Score and debrief
+### Part 3: Debrief
 
-Your facilitator will walk through the answers. Score your Part 1 list first:
+Your facilitator will walk through all 13. Talk about:
 
-- One point per problem found.
-- One bonus point when you named the fundamental behind it.
-
-Then score your agent's list the same way. Compare the two scores.
-
-Talk about:
-
-- Which problems would have reached production on your team? Be honest.
-- If your agent found more than you did, what does that tell you? What did the human add?
-- An agent wrote this PR. An agent can also review it. What was missing?
+- Your two, your agent's list, the full 13. What did each of you catch?
 - The tests passed. Why didn't that help?
 - Which claims in the PR description were wrong?
-- Where would a human reviewer need to know the domain or the codebase to spot the problem?
+- An agent wrote this PR. An agent can also review it. What was missing?
 
-## Review checklist
+## Take it home: a review checklist
 
-Smells are your review checklist now. Go through each one.
+Smells are your review checklist now. Use it on the next pull request you review.
 
 | Area | Ask |
 |------|-----|
