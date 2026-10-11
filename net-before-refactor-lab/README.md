@@ -219,3 +219,8 @@ Your facilitator will walk through what changed. Talk about:
 - The refactor really is easier to read. Is it better? Who gets to decide?
 - Some of the changes might be what the clinic wants. Who do you ask, and when?
 - Without your tests, how would this refactor have been reviewed? Would you have caught it?
+
+## Answers
+
+The odd behaviors worth pinning, and every change the refactor made:
+[ANSWERS.md on the `solution` branch](https://github.com/Fundamentals-of-Software-Engineering/workshop/blob/solution/net-before-refactor-lab/ANSWERS.md).

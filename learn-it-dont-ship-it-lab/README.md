@@ -132,3 +132,8 @@ Talk about:
 
 The rule of thumb: never written it? Write it once yourself. Written it a thousand times? Hand it
 off.
+
+## Answers
+
+After the quiz, check your answers and see a solved version:
+[ANSWERS.md on the `solution` branch](https://github.com/Fundamentals-of-Software-Engineering/workshop/blob/solution/learn-it-dont-ship-it-lab/ANSWERS.md).
