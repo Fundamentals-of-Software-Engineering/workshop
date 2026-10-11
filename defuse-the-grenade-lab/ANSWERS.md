@@ -31,9 +31,9 @@
 | "No breaking changes. Existing behavior is unchanged." | Searching " Franklin" broke (#5). |
 | "All 84 tests pass" | True. That's the trap. |
 
-## Show it live in the debrief
+## See it for yourself
 
-Run the app on the `defuse-the-grenade` branch. Each of these was checked against the running app.
+Run the app on the `defuse-the-grenade` branch (`./mvnw spring-boot:run`). Then open these.
 
 | Problem | Open this | What you see |
 |---|---|---|
@@ -253,8 +253,7 @@ prompt, word for word, and nothing else. It took 38 seconds.
 - **It ran nothing.** It read the diff. It said "All 84 tests pass" was something it "could not
   verify".
 
-Other tools and smaller models will find fewer. Expect a spread across the room. That's a good
-debrief.
+Other tools and smaller models will find fewer. How did yours do?
 
 The prompt doesn't point the agent at anything. "List every problem you find" is what you'd ask any
 reviewer. The lab's checklist and hints are on GitHub, not in the clone, so the agent never sees them.
@@ -269,5 +268,5 @@ The agent wins on count. So what did the person add?
 - **Context.** Does the front desk actually need the phone number? Only someone who knows the clinic
   can answer.
 
-The land: the same kind of model wrote this PR and caught every problem in it. The fix wasn't a
+The point: the same kind of model wrote this PR and caught every problem in it. The fix wasn't a
 better model. It was a gate: a required review before merging.
