@@ -17,6 +17,9 @@ Its `main` is PetClinic as of September 29, 2026. Labs that need more code have 
 By the afternoon you'll know PetClinic well. Each lab follows the same shape: do it yourself first,
 then with your agent, then compare.
 
+We might not get to every lab today. If we don't, try the rest on your own. Everything you need is
+here, answers included. Have questions? Find us at the conference. We'd love to talk about them.
+
 | # | Lab | What you do |
 |---|---|---|
 | 1 | [Read before you prompt](read-before-you-prompt-lab/) | Read PetClinic with no AI, then ask your agent the same questions and check its answers. |
