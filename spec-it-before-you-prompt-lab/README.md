@@ -128,3 +128,8 @@ These are in this lab's folder on GitHub, not in your PetClinic clone. Open them
 | `spec-template.md` | The blank spec. Copy it and fill it in. |
 | `rubric.md` | Score both plans in Part 2. |
 | `example-spec.md` | A finished spec for the weight feature. Don't open it until the debrief. |
+
+## Answers
+
+What one-line prompts usually miss, and what a good spec covers:
+[ANSWERS.md on the `solution` branch](https://github.com/Fundamentals-of-Software-Engineering/workshop/blob/solution/spec-it-before-you-prompt-lab/ANSWERS.md).

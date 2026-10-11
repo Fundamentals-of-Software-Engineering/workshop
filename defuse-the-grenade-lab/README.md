@@ -60,6 +60,9 @@ Stuck? Start with one of these:
 - `OwnerSearchResult`: what does it send back about each owner?
 - `OwnerController`: why did a search feature change this file?
 
+Still stuck? Every problem is explained in
+[ANSWERS.md on the `solution` branch](https://github.com/Fundamentals-of-Software-Engineering/workshop/blob/solution/defuse-the-grenade-lab/ANSWERS.md).
+
 ### Part 2: Ask your agent to review it
 
 Now give the same PR to your AI coding agent. No agent? Use a teammate's, or join a team that has one.
@@ -105,3 +108,8 @@ Smells are your review checklist now. Use it on the next pull request you review
 | Dependencies | Is each new dependency needed? Is the version current? |
 | Config | Does every new setting actually exist? |
 | Claims | Is every line in the PR description true? |
+
+## Answers
+
+All 13 problems, each one explained with the code and a fix:
+[ANSWERS.md on the `solution` branch](https://github.com/Fundamentals-of-Software-Engineering/workshop/blob/solution/defuse-the-grenade-lab/ANSWERS.md).

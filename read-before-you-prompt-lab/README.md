@@ -75,3 +75,8 @@ Your facilitator will walk through the real answers. Then talk about:
 - Did your agent invent anything? A class, a layer, a URL? Would you have caught it without Part 1?
 - Did it go along with a wrong idea in a question? What does that mean for how you write prompts?
 - Where did the agent beat you?
+
+## Answers
+
+When you finish Part 2, compare with the answers, including the two traps:
+[ANSWERS.md on the `solution` branch](https://github.com/Fundamentals-of-Software-Engineering/workshop/blob/solution/read-before-you-prompt-lab/ANSWERS.md).
