@@ -3,6 +3,13 @@
 An AI coding agent opened a pull request for Spring PetClinic. It adds a search for owners by pet name.
 It compiles. All 84 tests pass. The PR description says it's secure, fast and well tested.
 
+We've all seen this one. A pull request shows up. It builds, the tests are green, and the
+description sounds sure of itself. So it must be fine, right? How many times have you approved a PR
+like that? We all have.
+
+"It works" is where a review starts, not where it ends. Agents make this worse. They write more code,
+faster, and it always looks done. So we need to be more critical, not less.
+
 Your job: review it before it merges. Some of what you'll find is the kind of thing people now call a
 "slop grenade": work that looks done, gets passed along unread, and blows up on someone else.
 
