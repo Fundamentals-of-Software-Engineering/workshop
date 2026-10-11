@@ -25,9 +25,7 @@ here, answers included. Have questions? Find us at the conference. We'd love to 
 | 1 | [Read before you prompt](read-before-you-prompt-lab/) | Read PetClinic with no AI, then ask your agent the same questions and check its answers. |
 | 2 | [Defuse the grenade](defuse-the-grenade-lab/) | Review a pull request an agent wrote. Find the problems before they ship. |
 | 3 | [Spec it before you prompt](spec-it-before-you-prompt-lab/) | Plan the same feature twice, from a one-line prompt and from a short spec. Compare. |
-| 4 | [Net before refactor](net-before-refactor-lab/) | Pin down what old code does with tests, then let an agent refactor it. |
-| 5 | [Learn it, don't ship it](learn-it-dont-ship-it-lab/) | Learn a new library in tutor mode or author mode, then take a quiz with no AI. |
-| 6 | [Capstone: your AGENTS.md](capstone-agents-md/) | Write your own AGENTS.md, from what you saw in the labs. |
+| 4 | [Learn it, don't ship it](learn-it-dont-ship-it-lab/) | Learn a new library in tutor mode or author mode, then take a quiz with no AI. |
 
 ### Optional extra content
 
@@ -35,7 +33,9 @@ Use these if there's time, or take them home.
 
 | Lab | What you do |
 |---|---|
-| [Research a role with NotebookLM](tools/notebooklm-career-lab/) | Research a role you want with Gemini Notebook (formerly NotebookLM), then check its sources. |
+| [Net before refactor](net-before-refactor-lab/) | Pin down what old code does with tests, then let an agent refactor it. |
+| [Capstone: your AGENTS.md](capstone-agents-md/) | Write your own AGENTS.md, from what you saw in the labs. |
+| [Research a role with Gemini Notebook](tools/notebooklm-career-lab/) | Research a role you want with Gemini Notebook (formerly NotebookLM), then check its sources. |
 | [Your personal tech radar](tools/tech-radar-lab/) | Put the tools you know and want to learn into Adopt, Trial, Assess and Hold. |
 
 ### From earlier workshops
@@ -78,9 +78,9 @@ Each lab tells you which branch to use.
 | Read before you prompt | `main` |
 | Defuse the grenade | `defuse-the-grenade` |
 | Spec it before you prompt | `main` |
-| Net before refactor | `net-before-refactor` |
+| Net before refactor (optional) | `net-before-refactor` |
 | Learn it, don't ship it | `learn-it-dont-ship-it` |
-| Capstone | `main` |
+| Capstone (optional) | `main` |
 
 Before you switch, run `git status`. If it shows changes from an earlier lab, run `git stash -u`
 first. That puts your work aside, and you can get it back later with `git stash pop`.
