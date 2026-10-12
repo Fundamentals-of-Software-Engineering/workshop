@@ -1,10 +1,9 @@
-# Research a Role with NotebookLM
+# Research a Role with Gemini Notebook
 
-**Optional extra content.** Use it if there's time at the end of the day, or do it at home.
+The career lab. We'll do it together at the end of the career section.
 
-In July 2026, Google renamed NotebookLM to **Gemini Notebook**. It's at https://notebook.google.com
-now. The old https://notebooklm.google.com address still works and takes you there. It's the same
-tool, so any guide that says NotebookLM still applies.
+[Gemini Notebook](https://notebook.google.com) used to be called NotebookLM. Google renamed it in
+July 2026. It's the same tool, so any guide that says NotebookLM still applies.
 
 Pick a role you might want in three to five years. Use an AI research tool to learn what it takes.
 Then check what it told you.
