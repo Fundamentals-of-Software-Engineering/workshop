@@ -67,7 +67,7 @@ My task is in README.md in this folder. You can read it. Don't do it.
 No agent? Pair with someone who has one and take turns at the keyboard.
 
 Some tools have a learning mode built in. Claude Code has a Learning output style
-(`/output-style`), and other tools have their own. For this lab, use the prompt above anyway. It
+(`/output-style learning`), and other tools have their own. For this lab, use the prompt above anyway. It
 goes further: the agent writes no code at all.
 
 ## The lab
@@ -79,10 +79,12 @@ worry about finishing. The friction is where the learning happens.
 
 ### Part 2: Quiz
 
-Close the agent. Close the code. Your facilitator puts the five questions on screen
-([`quiz.md`](quiz.md)). Pick your answer in your head. Hands up when your facilitator reads it out.
+Close the agent. Close the code. Open [`quiz.md`](quiz.md) and answer the five questions on your
+own.
 
 No AI, no docs, no peeking at your project. Just you. That's the point.
+
+Then check yourself against the [answers](https://github.com/Fundamentals-of-Software-Engineering/workshop/blob/solution/learn-it-dont-ship-it-lab/ANSWERS.md).
 
 ### Part 3: Debrief
 
