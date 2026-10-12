@@ -2,7 +2,7 @@
 
 Five questions.
 
-No AI. No docs. No looking at your project. Write your answers on paper.
+No AI. No docs. No looking at your project.
 
 All questions use the clinic app from the lab. It has four packages under `com.example.clinic`:
 `domain`, `repository`, `service` and `web`.
@@ -112,4 +112,4 @@ Why does it fail?
 
 ---
 
-Done? Put your pen down. Your facilitator will read the answers.
+Done? Check yourself against the [answers](https://github.com/Fundamentals-of-Software-Engineering/workshop/blob/solution/learn-it-dont-ship-it-lab/ANSWERS.md).
