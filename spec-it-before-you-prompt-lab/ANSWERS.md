@@ -19,9 +19,8 @@
 
 ## What good looks like
 
-`example-spec.md` in this lab is the one-page version. The detailed spec and its 11 tests are on the
-`spec-it-stretch` branch of PetClinic. `reference.diff` on this branch is a build that passes them
-(10 of 11 are red before it).
+`example-spec.md` in this lab. It records a weight at each visit, so the visit list becomes the
+history. It names the edge cases and the tests up front.
 
 ## The point
 
