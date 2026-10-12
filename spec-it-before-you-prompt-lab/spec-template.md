@@ -1,7 +1,7 @@
 # Spec: (feature name)
 
-**For the lab, fill in two sections: Edge cases, and Acceptance criteria written as tests.** The
-rest is here for when you write a real spec.
+**Optional.** The lab gives you a finished spec (`example-spec.md`). Use this if you'd rather write
+your own. For the lab, fill in Edge cases and Acceptance criteria. The rest is for a real spec.
 
 Keep it to one page. Bullets are fine. If a section doesn't apply, write "none" so the reader knows
 you thought about it.
