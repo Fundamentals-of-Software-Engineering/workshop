@@ -9,14 +9,12 @@ didn't change what the clinic charges?
 > "Your first goal is to document the existing behavior, not change it."
 > (Fundamentals of Software Engineering, chapter 6)
 
-Your job: build a safety net first. Then let the agent refactor, and see what your net catches.
+Your job: build a safety net first. Then let an agent refactor, and see what your net catches.
 
-## Setup (before the lab starts)
+## Setup
 
 You need the PetClinic clone from [Before the workshop](../README.md#before-the-workshop). You don't
 need Docker.
-
-The old class is on the `net-before-refactor` branch. Switch to it:
 
 ```bash
 git status
@@ -25,116 +23,45 @@ git switch net-before-refactor
 
 If `git status` showed changes from an earlier lab, run `git stash -u` before you switch.
 
-Open `src/main/java/org/springframework/samples/petclinic/owner/VisitFeeCalculator.java`. That's the
-whole lab. It's under 90 lines.
+## Characterization tests
 
-## What characterization tests are
-
-A characterization test records what the code does today. Not what it should do. Not what the
-comment says. What it actually does.
-
-Michael Feathers named them in *Working Effectively with Legacy Code*. Chapter 6 of *Fundamentals
-of Software Engineering* calls the same idea test-driven refactoring:
-
-1. Write tests that pin down the current behavior.
-2. Run them. They must pass on the old code.
-3. Refactor.
-4. Run them again. They must still pass. You don't change the tests.
-
-The hard part is step 1. You'll find things that look like bugs. Don't fix them. Write a test that
-pins them down, give it a name that says what's odd, and ask someone later. Somebody might depend on
-that bug.
+A characterization test records what the code does today, not what it should do. If something looks
+like a bug, don't fix it. Pin it with a test, and name the test after the surprise. Somebody might
+depend on that bug.
 
 ## The lab
 
-Work in pairs or teams of three.
+Work alone or in pairs.
 
-### Part 1: Read and characterize
+### Part 1: Build the net
 
-Read `VisitFeeCalculator` first. Then write tests in
-`src/test/java/org/springframework/samples/petclinic/owner/VisitFeeCalculatorTests.java`.
+Read `src/main/java/org/springframework/samples/petclinic/owner/VisitFeeCalculator.java`. It's under
+90 lines.
 
-Here's a starter with one test and the setup you need:
-
-```java
-package org.springframework.samples.petclinic.owner;
-
-import java.time.LocalDate;
-
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
-class VisitFeeCalculatorTests {
-
-	private static final LocalDate WEDNESDAY = LocalDate.of(2026, 10, 14);
-
-	private final VisitFeeCalculator calculator = new VisitFeeCalculator();
-
-	@Test
-	void adultDogPaysTheBaseExamFee() {
-		Pet pet = pet("dog", LocalDate.of(2020, 5, 1));
-		Visit visit = visit(WEDNESDAY, "checkup");
-
-		assertThat(calculator.feeFor(ownerOf(pet), pet, visit)).isEqualByComparingTo("45.00");
-	}
-
-	private static Pet pet(String typeName, LocalDate birthDate) {
-		PetType type = new PetType();
-		type.setName(typeName);
-		Pet pet = new Pet();
-		pet.setName("Rex");
-		pet.setType(type);
-		pet.setBirthDate(birthDate);
-		return pet;
-	}
-
-	private static Owner ownerOf(Pet... pets) {
-		Owner owner = new Owner();
-		for (Pet pet : pets) {
-			owner.addPet(pet);
-		}
-		return owner;
-	}
-
-	private static Visit visit(LocalDate date, String description) {
-		Visit visit = new Visit();
-		visit.setDate(date);
-		visit.setDescription(description);
-		return visit;
-	}
-
-}
-```
-
-Run it:
+Then open `VisitFeeCalculatorTests.java` in the same package under `src/test`. It has one test and
+the helpers you need. Run it:
 
 ```bash
-./mvnw spring-javaformat:apply
-./mvnw test -Dtest=VisitFeeCalculatorTests
+./mvnw spring-javaformat:apply test -Dtest=VisitFeeCalculatorTests
 ```
 
-The build checks formatting. The first line fixes it for you, so run it before every test run.
+The build checks formatting, so this one line formats your code and runs the tests. Use it every
+time.
 
-Now add tests. Things to vary:
+Now add tests. Vary these:
 
 - The pet type: dog, cat, snake, lizard, bird, hamster
 - The pet's age, right at each boundary
 - The visit description: a rabies shot, spaying, neutering, a follow-up
-- How many pets the owner has
-- The day of the week
-- Anything that combines two of these
 
-A trick that works: guess the answer, write the assert, and run it. If it fails, the failure message
-shows what the code really returns. If the real value surprises you, keep it. Put the real value in
-the test, and name the test after the surprise.
+A trick that works: guess the answer, write the assert, and run it. If it fails, the message shows
+what the code really returns. If the real value surprises you, keep it, and name the test after the
+surprise.
 
-You can write the tests by hand, or have your agent help. If you use an agent, try this prompt, and
-watch what it does with the odd parts:
+You can have your agent help. If you do, watch what it does with the odd parts:
 
 > Write characterization tests for VisitFeeCalculator in VisitFeeCalculatorTests. Pin down what the
-> code does today, including anything that looks like a bug. Don't change VisitFeeCalculator. If
-> something looks wrong, write a test for the current behavior and tell me about it.
+> code does today, including anything that looks like a bug. Don't change VisitFeeCalculator.
 
 When your tests pass, commit them:
 
@@ -145,80 +72,42 @@ git commit -m "Characterization tests for VisitFeeCalculator"
 
 If Git asks who you are, run the two `git config` lines it shows you, then commit again.
 
-Now you can see if anyone touches them.
+### Part 2: Refactor, then run your net
 
-### Part 2: Let your agent refactor it
+Pick one:
 
-No agent on either laptop? Skip to Part 3.
+- **With an agent.** Start a fresh session. Don't mention your tests. Give it this prompt, and say no
+  if it asks to commit:
 
-Start a fresh agent session. Give it this prompt. Don't mention your tests. We want to see what it
-does on its own.
+  > Refactor VisitFeeCalculator so it's easier to read and change. Keep the behavior the same.
 
-> Refactor VisitFeeCalculator so it's easier to read and change. Keep the behavior the same.
+- **Without one.** Use the refactor we saved:
 
-If it asks to commit, say no. Part 3 needs its changes left uncommitted.
+  ```bash
+  git restore --source origin/net-before-refactor-agent src/main
+  ```
 
-When it's done:
+Then run your tests with the same one line as before. Which ones went red? For each one, did the
+refactor change behavior, or is your test wrong?
 
-1. Read its summary. Does it say the behavior is the same?
-2. Run `git status` and `git diff --stat`. Did it touch only the calculator? Did it touch your tests?
-3. Run your tests yourself: `./mvnw spring-javaformat:apply` then
-   `./mvnw test -Dtest=VisitFeeCalculatorTests`.
+All green? Read the diff (`git diff src/main`). Your net has a hole somewhere. Find the change your
+tests missed.
 
-For each red test, decide: did the refactor change behavior, or is the test wrong?
+## Debrief
 
-All green? Good. How would you know that without your tests? Then do Part 3 too.
+- What did the refactor change? Did its summary say so?
+- Did you pin something that looked like a bug? How did that feel?
+- Without your tests, would anyone have caught this in review?
 
-### Part 3: No agent? Use ours
+A refactor that changes behavior isn't a refactor.
 
-No AI tool, or want a second opinion? We saved a refactor an agent might write. It reads much
-nicer. Its summary said:
+## Take it further
 
-> Refactored VisitFeeCalculator for readability. Pulled the magic numbers into named constants and
-> split the logic into small methods. Switched to BigDecimal for money. No behavior changes.
-
-Make sure your tests are committed (end of Part 1). Then set your agent's version aside, if you
-have one, bring in ours, and run your tests:
-
-```bash
-git stash --include-untracked
-git restore --source origin/net-before-refactor-agent src/main
-./mvnw test -Dtest=VisitFeeCalculatorTests
-```
-
-The first line says "No local changes to save" if you had no agent. That's fine.
-
-Did your agent commit its refactor? Check with `git log --oneline -3`. If it did, start a branch from
-your tests commit first: `git switch -c our-refactor <hash of your tests commit>`. Then run the
-`git restore` line again.
-
-Read the diff while the tests run: `git diff src/main`.
-
-Did your net catch every change? If everything is green, your net has a hole. Find the change in the
-diff that your tests missed. Write the test that would have caught it. Then check it both ways:
-
-```bash
-./mvnw spring-javaformat:apply               # format your new test
-git stash push src/main                      # back to the old code
-./mvnw test -Dtest=VisitFeeCalculatorTests   # the new test must pass
-git stash pop                                # the refactor again
-./mvnw test -Dtest=VisitFeeCalculatorTests   # the new test must fail
-```
-
-Want your agent's version back after the lab? Run `git restore src/main`, then `git stash pop`.
-
-### Part 4: Debrief
-
-Your facilitator will walk through what changed. Talk about:
-
-- How many of the odd behaviors did you find? Which one surprised you most?
-- Did you write a test for something that looked like a bug? How did that feel?
-- What did the agent's refactor change? Did its summary say so?
-- Did your agent run your tests without being asked? Did it change any tests?
-- If you used an agent in Part 1, did it pin the odd behavior or "fix" it?
-- The refactor really is easier to read. Is it better? Who gets to decide?
-- Some of the changes might be what the clinic wants. Who do you ask, and when?
-- Without your tests, how would this refactor have been reviewed? Would you have caught it?
+- Write the test that would have caught the change your net missed. It should pass on the old code
+  and fail on the refactor.
+- Try the other refactor. Run `git restore src/main` to go back to the old code, then try the path
+  you didn't pick in Part 2.
+- Read *Working Effectively with Legacy Code* by Michael Feathers. He named characterization tests.
 
 ## Answers
 
