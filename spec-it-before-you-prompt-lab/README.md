@@ -80,10 +80,10 @@ Your facilitator will run the spec's tests. Talk about:
 
 ## Stretch: write the failing test before the prompt
 
-The spec ends with a test class, `PetWeightTests`. It compiles against PetClinic and fails until the
-feature works.
+Each line in the spec's Tests section is a real test. We wrote them as a test class,
+`PetWeightTests`. It compiles against PetClinic and fails until the feature works.
 
-We put the spec and its tests on a branch for you. Set aside any changes an agent made, then switch:
+We put a more detailed version of the spec and its tests on a branch for you. Set aside any changes an agent made, then switch:
 
 ```bash
 git stash -u
@@ -92,7 +92,7 @@ git switch spec-it-stretch
 
 `git stash -u` says "No local changes to save" if there's nothing to set aside. That's fine.
 
-1. `example-spec.md` is in the PetClinic folder now, so your agent can read it. The tests are in
+1. The detailed spec, `example-spec.md`, is in the PetClinic folder now, so your agent can read it. The tests are in
    `src/test/java/org/springframework/samples/petclinic/owner/PetWeightTests.java`.
 2. Run `./mvnw test -Dtest=PetWeightTests`. Ten of the 11 tests fail. That's the red step.
 3. Give your agent the green step:
