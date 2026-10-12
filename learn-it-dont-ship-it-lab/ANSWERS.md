@@ -5,7 +5,7 @@
 - **Rule 1** (`web` never uses `repository`) fails 3 times. `VisitController` takes the repository
   as a field and a constructor parameter, and calls it. Fix: go through `VisitService`.
 - **Rule 2** (`domain` depends only on `domain`) needs `"java.."` allowed too, or it fails 19 times.
-- **Rule 3** (`*Repository` lives in `repository`) passes. Not every rule finds something.
+- **Stretch:** `*Repository` lives in `repository` passes. Not every rule finds something.
 
 Reference solution: `solution/` in this folder on this branch.
 
@@ -19,7 +19,7 @@ Reference solution: `solution/` in this folder on this branch.
    purpose. Fix the pattern.
 5. **B.** "Only depend on" means only. `String`, `Object` and `LocalDate` count. Allow `"java.."`.
 
-One point each. For 3 and 4, the main idea gets the point.
+For 3 and 4, the main idea counts.
 
 ## The point
 
