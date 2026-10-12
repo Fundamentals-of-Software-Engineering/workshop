@@ -72,47 +72,11 @@ Put the two plans side by side. If an agent built code, look at the diff too. Ta
 
 ### Part 3: Debrief
 
-Your facilitator will run the spec's tests. Talk about:
+Your facilitator will walk through what the spec decided. Talk about:
 
 - "Track their health over time." Did either agent build weight history? Should it?
 - Which edge cases would have reached production? How would you have found out?
 - When is a one-line prompt good enough? When does it cost you more than it saves?
-
-## Stretch: write the failing test before the prompt
-
-Each line in the spec's Tests section is a real test. We wrote them as a test class,
-`PetWeightTests`. It compiles against PetClinic and fails until the feature works.
-
-We put a more detailed version of the spec and its tests on a branch for you. Set aside any changes an agent made, then switch:
-
-```bash
-git stash -u
-git switch spec-it-stretch
-```
-
-`git stash -u` says "No local changes to save" if there's nothing to set aside. That's fine.
-
-1. The detailed spec, `example-spec.md`, is in the PetClinic folder now, so your agent can read it. The tests are in
-   `src/test/java/org/springframework/samples/petclinic/owner/PetWeightTests.java`.
-2. Run `./mvnw test -Dtest=PetWeightTests`. Ten of the 11 tests fail. That's the red step.
-3. Give your agent the green step:
-
-   > Make PetWeightTests pass. Follow example-spec.md. Don't change the tests. Then run the full
-   > test suite and tell me what you checked and what you didn't.
-
-4. Review the diff. Do the tests pass for the right reasons?
-
-The full test suite needs Docker for the MySQL and Postgres tests. Without Docker, run
-`./mvnw test -Dtest='!MySqlIntegrationTests,!PostgresIntegrationTests'`.
-
-## Files
-
-These are in this lab's folder on GitHub, not in your PetClinic clone. Open them in your browser.
-
-| File | What it's for |
-|---|---|
-| `example-spec.md` | The spec for the lab, filled in. |
-| `spec-template.md` | A blank spec, if you'd rather write your own. |
 
 ## Learn more
 
