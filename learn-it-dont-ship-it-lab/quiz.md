@@ -2,7 +2,7 @@
 
 Five questions.
 
-No AI. No docs. No looking at your project. Write your answers on paper.
+No AI. No docs. No looking at your project. Pick your answer in your head.
 
 All questions use the clinic app from the lab. It has four packages under `com.example.clinic`:
 `domain`, `repository`, `service` and `web`.
@@ -112,4 +112,4 @@ Why does it fail?
 
 ---
 
-Done? Put your pen down. Your facilitator will read the answers.
+Hands up when your facilitator reads each answer.

@@ -8,10 +8,9 @@ People who asked the AI to explain, asked conceptual questions, or checked their
 scored much higher.
 
 This lab is a small, live version of that study. You'll learn a library you probably haven't used,
-in one of two modes. Then you'll take a short quiz. No AI, no notes. We'll see how the two modes
-compare.
+with your agent as a tutor, not an author. Then you'll take a short quiz. No AI, no notes.
 
-**Goal:** feel the difference between learning with an agent and handing the work to one.
+**Goal:** feel what learning with an agent is like when it won't do the work for you.
 
 ## The library: ArchUnit
 
@@ -44,21 +43,10 @@ write them.
 Open your agent in the `clinic-rules` folder, not the PetClinic folder. The task is in
 `clinic-rules/README.md`.
 
-## The two modes
-
-Your facilitator will split the room in half. One half is tutor mode. The other half is author
-mode. If the facilitator says so, you can pick your own mode instead. Stick with it for the whole
-lab.
-
-Grab a sheet of paper for the quiz. Write your mode at the top: **T** for tutor, **A** for author.
-
-No agent? Pair with someone who has one. You both use the same mode. In tutor mode, take turns at
-the keyboard. You each take the quiz on your own.
-
-### Tutor mode
+## Tutor mode
 
 The agent can explain, ask you questions, give hints and review your code. It can't write the
-solution. You type every line of the rules and the fix.
+solution. You type every line yourself.
 
 Paste this into your agent before you start:
 
@@ -66,8 +54,7 @@ Paste this into your agent before you start:
 I'm learning ArchUnit for the first time. Be my tutor, not my coder.
 My task is in README.md in this folder. You can read it. Don't do it.
 
-- Never write the solution for me. That means the rules and the fix in this project.
-  Not even one line. If I ask you to, remind me I'm in tutor mode.
+- Never write the solution for me. Not even one line. If I ask you to, remind me I'm in tutor mode.
 - Explain ideas in plain words. Keep answers short.
 - Before you explain something, ask me what I think first.
 - Before I run a test, ask me to predict whether it will pass.
@@ -77,58 +64,33 @@ My task is in README.md in this folder. You can read it. Don't do it.
 - When I ask for a review, point to the problem. Don't rewrite my code.
 ```
 
-Some tools have a learning mode built in. For example, Claude Code has Learning and Explanatory
-output styles (`/output-style`). The Learning style leaves small pieces of code for you to write,
-marked `TODO(human)`. Other tools have their own study or learning modes. Check your tool's docs.
+No agent? Pair with someone who has one and take turns at the keyboard.
 
-For this lab, use the prompt above anyway. It goes further: the agent writes no solution code at
-all. And it means everyone in tutor mode gets the same coach.
-
-### Author mode
-
-The agent writes the code. Accept what it writes, run the tests, and move on. Work the way you
-would on a busy day with a deadline.
-
-Paste this into your agent:
-
-```text
-Read README.md in this folder and do the task. Write the three rules in ArchitectureTest.java.
-Fix any code that breaks a rule. Run ./mvnw test until it passes.
-```
-
-Don't ask it to teach you. That's the other group's job.
+Some tools have a learning mode built in. Claude Code has a Learning output style
+(`/output-style`), and other tools have their own. For this lab, use the prompt above anyway. It
+goes further: the agent writes no code at all.
 
 ## The lab
 
 ### Part 1: Build it
 
-Do the task in `clinic-rules/README.md`, in your mode. Three rules, then fix the code that breaks one.
-
-Tutor mode and finished early? Try the stretch goal. Author mode is done when the tests pass. Move
-on, like you would at work.
+Do the task in `clinic-rules/README.md`: write two rules, then fix the code that breaks one. Don't
+worry about finishing. The friction is where the learning happens.
 
 ### Part 2: Quiz
 
-Close the agent. Close the code. Open `quiz.md`, or look at the screen if your facilitator shows
-it. Answer the five questions on paper.
+Close the agent. Close the code. Your facilitator puts the five questions on screen
+([`quiz.md`](quiz.md)). Pick your answer in your head. Hands up when your facilitator reads it out.
 
 No AI, no docs, no peeking at your project. Just you. That's the point.
 
-### Part 3: Score and debrief
-
-Your facilitator will read the answers. Score your own paper. One point per question. For questions
-3 and 4, give yourself the point if you got the main idea. The most you can get is 5.
-
-Then hands up by score, tutor mode first, then author mode.
+### Part 3: Debrief
 
 Talk about:
 
-- Which mode scored higher? Which mode finished first?
-- Look at questions 3 to 5. They're about reading failures. How did each group do on those?
-- Author mode: could you explain why rule 1 failed three times, not once?
-- Tutor mode: how did it feel? Slow? Annoying? That friction is where the learning happens.
-- Did anyone in author mode stop to ask "why"? What happened when you did?
-- When would you pick author mode on purpose?
+- Questions 3 to 5 are about reading failure messages. How did you do on those?
+- How did tutor mode feel? Slow? Annoying? That friction is where the learning happens.
+- When would you hand the work to your agent on purpose?
 
 The rule of thumb: never written it? Write it once yourself. Written it a thousand times? Hand it
 off.
