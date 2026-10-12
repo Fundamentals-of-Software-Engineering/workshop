@@ -26,6 +26,7 @@ here, answers included. Have questions? Find us at the conference. We'd love to 
 | 2 | [Defuse the grenade](defuse-the-grenade-lab/) | Review a pull request an agent wrote. Find the problems before they ship. |
 | 3 | [Spec it before you prompt](spec-it-before-you-prompt-lab/) | Plan the same feature twice, from a one-line prompt and from a short spec. Compare. |
 | 4 | [Learn it, don't ship it](learn-it-dont-ship-it-lab/) | Learn a new library in tutor mode or author mode, then take a quiz with no AI. |
+| 5 | [Research a role with Gemini Notebook](research-a-role-lab/) | The career lab. Research a role you want from real sources, then check what it told you. |
 
 ### Optional extra content
 
@@ -35,7 +36,6 @@ Use these if there's time, or take them home.
 |---|---|
 | [Net before refactor](net-before-refactor-lab/) | Pin down what old code does with tests, then let an agent refactor it. |
 | [Capstone: your AGENTS.md](capstone-agents-md/) | Write your own AGENTS.md, from what you saw in the labs. |
-| [Research a role with Gemini Notebook](tools/notebooklm-career-lab/) | Research a role you want with Gemini Notebook (formerly NotebookLM), then check its sources. |
 | [Your personal tech radar](tools/tech-radar-lab/) | Put the tools you know and want to learn into Adopt, Trial, Assess and Hold. |
 
 ### From earlier workshops
@@ -53,7 +53,7 @@ Use these if there's time, or take them home.
   Pair with someone who has one.
 - Docker, only if you want to run PetClinic's full test suite. The MySQL and Postgres tests need
   it. No lab requires it.
-- A Google account, only for the NotebookLM lab
+- A Google account, for the Gemini Notebook lab
 
 ## Before the workshop
 
