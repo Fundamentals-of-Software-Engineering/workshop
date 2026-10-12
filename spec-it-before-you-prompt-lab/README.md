@@ -120,6 +120,11 @@ These are in this lab's folder on GitHub, not in your PetClinic clone. Open them
 | `spec-template.md` | The blank spec. For the lab, fill in Edge cases and Acceptance criteria. |
 | `example-spec.md` | A finished spec for the weight feature. Don't open it until the debrief. |
 
+## Learn more
+
+Dan's video on the middle ground between vibe coding and full specs:
+[Vibe Coding vs Spec-Driven Development: The Solo Dev Middle Ground](https://www.youtube.com/watch?v=1xyHQj8pwwo).
+
 ## Answers
 
 What one-line prompts usually miss, and what a good spec covers:
