@@ -45,24 +45,21 @@ read it.
 
 No plan mode in your tool? Add one line after it: "Make a plan. Don't write code yet."
 
-Answer any questions it asks, as best you can. Read its plan. Write down:
-
-- Every assumption it made that you didn't tell it
-- Every file it plans to change
-- Any question it asked you
+Answer any questions it asks, as best you can. Read its plan. Notice what it assumed that you never
+told it, and whether it asked you anything before planning.
 
 Then, if you like, let it build. If it builds, run the tests: `./mvnw test -Dtest='Pet*Tests'`.
 
-**Spec writer.** Don't prompt yet. Fill in `spec-template.md`. Keep it short.
-Bullet points are fine. Look at the code when you need to. The two most important sections:
+**Spec writer.** Don't prompt yet. Open [`spec-template.md`](spec-template.md) and fill in just two
+sections. Bullets are fine. Look at the code when you need to.
 
 - **Edge cases.** What about the pets that already exist? What's a valid weight? What happens when
   someone edits a pet?
 - **Acceptance criteria, written as tests.** Name each test and say what it checks. The test name
   is the requirement.
 
-Fill in those two first. Do the rest if you have time. Don't open `example-spec.md` yet. It's a
-finished spec, and you'll see it in the debrief.
+Skip the rest of the template. Don't open `example-spec.md` yet. It's a finished spec, and you'll
+see it in the debrief.
 
 Then give your agent the spec, in plan mode:
 
@@ -73,13 +70,11 @@ Then give your agent the spec, in plan mode:
 
 ### Part 2: Compare
 
-Put the two plans side by side. If an agent built code, look at the diff too. Score both with
-`rubric.md`. Go fast. A quick score is fine. Then answer:
+Put the two plans side by side. If an agent built code, look at the diff too. Talk it through:
 
 - What did the one-line plan assume that the spec decided?
-- What did the spec miss that the agent caught?
-- Which plan would you rather review as a pull request?
-- How long did each one take, end to end?
+- What did the agent catch that the spec missed?
+- Which plan would you rather merge?
 
 ### Part 3: Debrief
 
@@ -87,9 +82,6 @@ Your facilitator will show an example spec and the tests that go with it. Talk a
 
 - "Track their health over time." Did either agent build weight history? Should it?
 - Which edge cases would have reached production? How would you have found out?
-- Diagrams don't compile. Neither do specs. Tests do. Which of your spec lines could become a test?
-  Which couldn't?
-- Did your agent follow the patterns already in the codebase, or invent its own?
 - When is a one-line prompt good enough? When does it cost you more than it saves?
 
 ## Stretch: write the failing test before the prompt
@@ -125,8 +117,7 @@ These are in this lab's folder on GitHub, not in your PetClinic clone. Open them
 
 | File | What it's for |
 |---|---|
-| `spec-template.md` | The blank spec. Copy it and fill it in. |
-| `rubric.md` | Score both plans in Part 2. |
+| `spec-template.md` | The blank spec. For the lab, fill in Edge cases and Acceptance criteria. |
 | `example-spec.md` | A finished spec for the weight feature. Don't open it until the debrief. |
 
 ## Answers
