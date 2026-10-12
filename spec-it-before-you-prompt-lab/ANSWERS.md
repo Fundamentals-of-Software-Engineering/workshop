@@ -19,8 +19,9 @@
 
 ## What good looks like
 
-`example-spec.md` in this lab, and `reference.diff` on this branch. The spec's 11 tests fail on the
-pinned commit (10 red) and pass on the reference build.
+`example-spec.md` in this lab is the one-page version. The detailed spec and its 11 tests are on the
+`spec-it-stretch` branch of PetClinic. `reference.diff` on this branch is a build that passes them
+(10 of 11 are red before it).
 
 ## The point
 
